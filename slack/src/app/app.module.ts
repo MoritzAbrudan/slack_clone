@@ -10,6 +10,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ChannelBoxComponent } from './sidebar/channel-box/channel-box.component';
 import { UserBoxComponent } from './sidebar/user-box/user-box.component';
 import { ThreatBarComponent } from './threat-bar/threat-bar.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ThreatBarComponent } from './threat-bar/threat-bar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

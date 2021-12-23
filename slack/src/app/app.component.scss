@@ -1,0 +1,13 @@
+.overall {}
+
+.mainSection {
+    display: flex;
+    .left {
+        width: 20%;
+        height: 100vh;
+    }
+    right {
+        width: 80%;
+        height: 100vh;
+    }
+}
