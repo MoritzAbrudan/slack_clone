@@ -5,11 +5,15 @@
 
   <div class="example-sidenav-content">
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
+      <mat-toolbar-row class="header-container">
 
-        <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
-        <img class="header-logo" src="assets/favicons/favicon-96x96.png">
-        <span>Slack-Clone</span>
+        <div class="header-left">
+          <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+          <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+          <span>Slack-Clone</span>
+        </div>
+
+        <span class="header-right">Logout</span>
 
       </mat-toolbar-row>
     </mat-toolbar>
