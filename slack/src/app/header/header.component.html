@@ -1,14 +1,17 @@
 <mat-drawer-container class="mat-drawer-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-        <app-sidebar></app-sidebar>
-    </mat-drawer>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
 
-    <div class="example-sidenav-content">
-        <mat-toolbar color="primary">
-            <mat-toolbar-row>
-                <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
-                <span>Slack</span>
-            </mat-toolbar-row>
-        </mat-toolbar>
-    </div>
+  <div class="example-sidenav-content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+
+        <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+        <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+        <span>Slack-Clone</span>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+  </div>
 </mat-drawer-container>
