@@ -1,0 +1,77 @@
+<div class="container">
+  <mat-card class="container-card">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+        <span>Slack-Clone</span>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-tab-group mat-align-tabs="center">
+      <mat-tab label="Login">
+        <form [formGroup]="signInForm">
+          <mat-form-field class="mt-32 full-width" appearance="outline">
+            <mat-label class="full-width">E-Mail</mat-label>
+            <input matInput placeholder="E-mail address" formControlName="email" type="email" required />
+            <mat-icon class="mr-8" matSuffix>mail</mat-icon>
+            <mat-error *ngIf="email?.errors?.['required']"> Email is required</mat-error>
+            <mat-error *ngIf="email?.errors?.['email']"> Please enter a correct email format</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Enter your password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" required minlength="8" />
+            <mat-error *ngIf="password?.errors?.['required']"> Password is required</mat-error>
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+          </mat-form-field>
+          <mat-card-actions class="full-width">
+            <button mat-flat-button color="primary" (click)="onSignIn()">Login</button>
+          </mat-card-actions>
+        </form>
+      </mat-tab>
+      <mat-tab label="Registration">
+        <form class="mt-32" [formGroup]="signUpForm">
+          <div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Enter your email </mat-label>
+              <input value="email" formControlName="email" type="email" matInput placeholder="E-mail address"
+                required />
+                <mat-icon class="mr-8" matSuffix>mail</mat-icon>
+              <mat-error *ngIf="email?.errors?.['required']"> Email is required</mat-error>
+              <mat-error *ngIf="email?.errors?.['email']"> Please enter a correct email format</mat-error>
+            </mat-form-field>
+          </div>
+
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Enter your password</mat-label>
+            <input formControlName="password" matInput required [type]="hide1 ? 'password' : 'text'" minlength="8" />
+            <button mat-icon-button matSuffix (click)="hide1 = !hide1">
+              <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="signUpForm.hasError('required', 'password')">
+              Please enter your newpassword
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Confirm your password</mat-label>
+            <input formControlName="confirmPassword" required matInput
+              [type]="hide ? 'password' : 'text'" minlength="8" />
+            <button mat-icon-button matSuffix (click)="hide = !hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="signUpForm.hasError('notSame')">
+              Passwords do not match
+            </mat-error>
+          </mat-form-field>
+          <mat-card-actions class="full-width">
+            <button mat-flat-button color="primary" (click)="onSignUp()">Login</button>
+          </mat-card-actions>
+        </form>
+      </mat-tab>
+    </mat-tab-group>
+    
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

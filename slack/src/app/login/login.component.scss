@@ -1,0 +1,32 @@
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-logo {
+    height: 50px;
+    margin: 10px;
+}
+
+.container-card {
+    width: 400px;
+    padding: unset;
+}
+
+form{
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.mat-card-footer{
+    margin: unset;
+}
+
+mat-card-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-left: 0px;
+    padding-top: 0px;
+}

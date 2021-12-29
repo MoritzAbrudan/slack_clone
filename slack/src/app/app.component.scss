@@ -1,13 +1,13 @@
-.overall {}
+/* .overall {
+    height: 100vh;
+} */
 
 .mainSection {
     display: flex;
     .left {
         width: 20%;
-        height: 100vh;
     }
-    right {
+    .right {
         width: 80%;
-        height: 100vh;
     }
 }
