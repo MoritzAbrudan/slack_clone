@@ -20,7 +20,10 @@ export class AuthService {
   }
 
   signUp(username: string, password: string){
-    return from(createUserWithEmailAndPassword(this._auth, username, password));
+    return from(createUserWithEmailAndPassword(this._auth, username, password).then(() =>{
+      this.login = true;
+      this.message = 'Logout';
+    }));
   }
   
   logout(){
