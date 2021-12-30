@@ -1,4 +1,4 @@
-<mat-drawer-container class="mat-drawer-container" autosize>
+<mat-drawer-container [class.d-none]="!authService.login" class="mat-drawer-container" autosize>
 
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <app-sidebar></app-sidebar>
