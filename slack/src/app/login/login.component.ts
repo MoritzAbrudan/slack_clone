@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit {
 
     const { email, password } = this.signInForm.value;
     await this.authService.signIn(email, password).subscribe(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/slack');
       this.loading = false;
     }, (error) =>{
       this.msg.open(error, 'Close');
@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit {
 
     const { email, password  } = this.signUpForm.value;
     await this.authService.signUp(email, password).subscribe(() => {
-      this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/slack');
       this.loading = false;
     });
   }

@@ -1,0 +1,26 @@
+<mat-drawer-container class="mat-drawer-container" autosize>
+
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row class="header-container">
+
+        <div class="header-left">
+          <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+          <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+          <span>Slack-Clone</span>
+        </div>
+
+        <a href="/" class="header-right">{{authService.message}}</a>
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+
+    <app-main></app-main>
+
+  </div>
+
+</mat-drawer-container>

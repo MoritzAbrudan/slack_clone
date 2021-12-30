@@ -1,8 +1,12 @@
 <div class="overall">
-    <router-outlet *ngIf="router.url == '/login'"></router-outlet>
-    <app-header></app-header>
-    <div class="mainSection">
+    <router-outlet></router-outlet>
+
+    <!--<div *ngIf="router.url !=='/login'">
+      <app-header></app-header>
+      <div class="mainSection">
         <app-sidebar class="left"></app-sidebar>
         <app-main class="right"></app-main>
-    </div>
+      </div>
+    </div>-->
+
 </div>
