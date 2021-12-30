@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-export class MyErrorStateMatcher implements ErrorStateMatcher {
+/* export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const invalidCtrl = !!(control && control.invalid);
     const invalidParent = !!(control && control.parent && control.parent.invalid && control.parent.dirty);
 
     return (invalidCtrl || invalidParent);
   }
-}
+} */
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponent implements OnInit {
 
-  matcher = new MyErrorStateMatcher();
+  /* matcher = new MyErrorStateMatcher(); */
   loading = false;
   hide = true;
   hide1 = true;
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
     confirmPassword: new FormControl('', Validators.required)
   });
 
-  constructor( public router: Router, private authService: AuthService,  public formBuilder: FormBuilder) { }
+  constructor( public router: Router, private authService: AuthService,  public formBuilder: FormBuilder, private msg: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -66,7 +67,10 @@ export class LoginComponent implements OnInit {
 
     const { email, password } = this.signInForm.value;
     await this.authService.signIn(email, password).subscribe(() => {
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/');
+      this.loading = false;
+    }, (error) =>{
+      this.msg.open(error, 'Close');
       this.loading = false;
     });
   }
@@ -80,7 +84,8 @@ export class LoginComponent implements OnInit {
 
     const { email, password  } = this.signUpForm.value;
     await this.authService.signUp(email, password).subscribe(() => {
-      this.router.navigate(['']);
+      this.router.navigateByUrl('/');
+      this.loading = false;
     });
   }
 }

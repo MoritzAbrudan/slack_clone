@@ -8,12 +8,12 @@
       <mat-toolbar-row class="header-container">
 
         <div class="header-left">
-          <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+          <mat-icon [class.d-none]="!authService.login" (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
           <img class="header-logo" src="assets/favicons/favicon-96x96.png">
           <span>Slack-Clone</span>
         </div>
 
-        <span class="header-right">Logout</span>
+        <a href="/login" class="header-right">{{authService.message}}</a>
 
       </mat-toolbar-row>
     </mat-toolbar>

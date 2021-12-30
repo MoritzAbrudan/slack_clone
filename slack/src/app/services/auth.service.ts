@@ -7,11 +7,16 @@ import { from } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  message: string = 'Login';
+  login = false;
 
   constructor(public _auth: Auth) { }
 
   signIn(username: string, password: string){
-   return from(signInWithEmailAndPassword(this._auth, username, password));
+   return from(signInWithEmailAndPassword(this._auth, username, password).then(() =>{
+     this.login = true;
+     this.message = 'Logout';
+   }));
   }
 
   signUp(username: string, password: string){
@@ -20,6 +25,6 @@ export class AuthService {
   
   logout(){
     this._auth.signOut();
-    localStorage.removeItem('user');
+    this.login = false;
   }
 }
