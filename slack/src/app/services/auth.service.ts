@@ -8,6 +8,7 @@ import { from } from 'rxjs';
 })
 export class AuthService {
   message: string = 'Login';
+  guest: string = 'Guest';
   login = false;
 
   constructor(public _auth: Auth) { }
@@ -24,6 +25,12 @@ export class AuthService {
       this.login = true;
       this.message = 'Logout';
     }));
+  }
+
+  signInGuest(){
+    this.guest;
+    this.login = true;
+    this.message = 'Logout';
   }
   
   logout(){

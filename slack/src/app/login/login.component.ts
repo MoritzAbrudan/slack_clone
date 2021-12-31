@@ -88,4 +88,9 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  loginGuest(){
+    this.authService.signInGuest();
+    this.router.navigateByUrl('/slack');
+  }
 }
