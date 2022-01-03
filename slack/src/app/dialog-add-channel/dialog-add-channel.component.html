@@ -1,1 +1,16 @@
-<p>dialog-add-channel works!</p>
+<div class="dialog">
+    <h2 mat-dialog-title>
+        Add a channel
+    </h2>
+    <div class="container" mat-dialog-content>
+        You can use channels to communicate with your team. You should create channels based on themes - like #marketinig.
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input [(ngModel)]="channel.title" matInput placeholder="# e.g. marketing">
+        </mat-form-field>
+        <div mat-dialog-actions>
+            <button mat-button (click)="dialogRef.close()">Cancel</button>
+            <button mat-button cdkFocusInitial (click)="saveChannel()">Save</button>
+        </div>
+    </div>
+</div>

@@ -3,8 +3,8 @@
         <div class="left">
             <div>
                 <button mat-icon-button>
-                    <mat-icon *ngIf=dropdown>arrow_drop_down</mat-icon>
-                    <mat-icon *ngIf=!dropdown>arrow_right</mat-icon>
+                    <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
+                    <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
                 </button>
             </div>
             <div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="openDialog()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
