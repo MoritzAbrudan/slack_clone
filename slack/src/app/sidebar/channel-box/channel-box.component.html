@@ -1,1 +1,31 @@
-<p>channel-box works!</p>
+<div class="menuChannelContainerOuter">
+    <div class="menuChannelContainerInner">
+        <div class="left">
+            <div>
+                <button mat-icon-button>
+                    <mat-icon *ngIf=dropdown>arrow_drop_down</mat-icon>
+                    <mat-icon *ngIf=!dropdown>arrow_right</mat-icon>
+                </button>
+            </div>
+            <div>
+                Channels
+            </div>
+        </div>
+        <div>
+            <button mat-icon-button>
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="menuChannelContainerList">
+        <div class="list" *ngFor="let channel of allChannels">
+            <div class="left">
+                #
+            </div>
+            <div>
+                CHANNEL NAME
+                <!-- {{ channel.title }} -->
+            </div>
+        </div>
+    </div>
+</div>

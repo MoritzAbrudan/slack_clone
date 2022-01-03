@@ -35,6 +35,9 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 @NgModule({
@@ -47,7 +50,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     UserBoxComponent,
     ThreatBarComponent,
     LoginComponent,
-    SlackAppComponent
+    SlackAppComponent,
+    DialogAddChannelComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +73,9 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    AngularFirestoreModule.enablePersistence({ synchronizeTabs: true }),
+    AngularFireModule.initializeApp(environment.firebase),
   ],
   providers: [],
   bootstrap: [AppComponent]
