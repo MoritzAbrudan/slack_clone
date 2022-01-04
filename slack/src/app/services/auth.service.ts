@@ -18,11 +18,8 @@ export class AuthService {
 
   constructor(public _auth: Auth, public firestore: AngularFirestore, public auth: AngularFireAuth) { }
 
-  signIn(email: string, password: string){
-   return from(signInWithEmailAndPassword(this._auth, email, password).then(() =>{
-     this.login = true;
-     this.message = 'Logout';
-   }));
+  signIn(userName: string, password: string){
+   return this.firestore.collection('users').doc().valueChanges({ idfield: 'customId' });
   }
 
   signUp(email: string, password: string){
