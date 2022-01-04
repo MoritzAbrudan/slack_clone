@@ -33,6 +33,18 @@
       <mat-tab label="Registration">
         <form class="mt-32" [formGroup]="signUpForm">
           <div>
+            <mat-form-field class="full-width" appearance="outline">
+              <mat-label>Username</mat-label>
+              <input type="text" matInput formControlName="userName" placeholder="Username">
+              <mat-icon class="mr-8" matSuffix>mode_edit</mat-icon>
+              <mat-error *ngIf="signUpForm.hasError('username') && !signUpForm.hasError('required')">
+                Please enter a valid Username
+              </mat-error>
+              <mat-error *ngIf="signUpForm.hasError('required')">
+                Username is required
+              </mat-error>
+            </mat-form-field>
+
             <mat-form-field appearance="outline" class="full-width">
               <mat-label>Enter your email </mat-label>
               <input value="email" formControlName="email" type="email" matInput placeholder="E-mail address"
@@ -50,7 +62,7 @@
               <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
             <mat-error *ngIf="signUpForm.hasError('required', 'password')">
-              Please enter your newpassword
+              Please enter your password
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" class="full-width">

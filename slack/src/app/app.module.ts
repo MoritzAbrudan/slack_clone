@@ -37,6 +37,10 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 
 
+//firestore
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +70,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

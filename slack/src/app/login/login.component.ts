@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { User } from 'src/models/user.class';
 import { AuthService } from '../services/auth.service';
+
 
 /* export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,9 +24,11 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
 
   /* matcher = new MyErrorStateMatcher(); */
+  user = new User();
   loading = false;
   hide = true;
   hide1 = true;
+  
 
   signInForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -34,10 +38,11 @@ export class LoginComponent implements OnInit {
   signUpForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    confirmPassword: new FormControl('', Validators.required)
+    confirmPassword: new FormControl('', Validators.required),
+    userName: new FormControl('', Validators.required)
   });
 
-  constructor( public router: Router, private authService: AuthService,  public formBuilder: FormBuilder, private msg: MatSnackBar) { }
+  constructor( public router: Router, private authService: AuthService,  public formBuilder: FormBuilder, private msg: MatSnackBar, public firestore: AngularFirestore) { }
 
   ngOnInit(): void {
   }
@@ -62,6 +67,7 @@ export class LoginComponent implements OnInit {
   async onSignIn() {
     this.loading = true;
     if (!this.signInForm.valid) {
+      this.loading = false;
       return;
     }
 
@@ -79,12 +85,17 @@ export class LoginComponent implements OnInit {
     this.checkPasswords;
     this.loading = true;
     if (!this.signUpForm.valid) {
+      this.loading = false;
       return;
     }
 
-    const { email, password  } = this.signUpForm.value;
+    const { email, password } = this.signUpForm.value;
+
     await this.authService.signUp(email, password).subscribe(() => {
       this.router.navigateByUrl('/slack');
+      this.loading = false;
+    }, (error) =>{
+      this.msg.open(error, 'Close');
       this.loading = false;
     });
   }
