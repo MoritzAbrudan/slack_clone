@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ref } from '@angular/fire/storage';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
   
 
   signInForm = new FormGroup({
-    userName: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
 
@@ -87,20 +88,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    const { userName, password } = this.signInForm.value;
-    await this.authService.signIn(userName, password).subscribe((result) =>{
-      if(result === undefined){
-        console.log('document existiert nicht');
-      } else {
-        console.log(result);
-      }
-    });
+    const { email, password } = this.signInForm.value;
+    await this.authService.signIn(email, password).subscribe(() => {
       this.router.navigateByUrl('/slack');
       this.loading = false;
-    /* }, (error) =>{
+    }, (error) =>{
       this.msg.open(error, 'Close');
       this.loading = false;
-    }); */
+    });
   }
 
   async onSignUp() {

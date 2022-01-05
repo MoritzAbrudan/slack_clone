@@ -11,7 +11,7 @@
         <form [formGroup]="signInForm">
           <mat-form-field class="mt-32 full-width" appearance="outline">
             <mat-label class="full-width">Username</mat-label>
-            <input matInput placeholder="Username" formControlName="userName" type="text" required />
+            <input matInput placeholder="Username" formControlName="email" type="text" required />
             <mat-icon class="mr-8" matSuffix>mail</mat-icon>
             <mat-error *ngIf="email?.errors?.['required']"> Email is required</mat-error>
             <mat-error *ngIf="email?.errors?.['email']"> Please enter a correct email format</mat-error>

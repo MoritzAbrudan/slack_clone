@@ -5,7 +5,7 @@ import {SlackAppComponent} from "./slack-app/slack-app.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'slack/:id', component: SlackAppComponent}
+  {path: 'slack', component: SlackAppComponent}
 ];
 
 @NgModule({
