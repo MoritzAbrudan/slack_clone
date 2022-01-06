@@ -18,11 +18,8 @@ export class AuthService {
 
   constructor(public _auth: Auth, public firestore: AngularFirestore, public auth: AngularFireAuth) { }
 
-  signIn(email: string, password: string){
-    return from(signInWithEmailAndPassword(this._auth, email, password).then(() =>{
-      this.login = true;
-      this.message = 'Logout';
-    }));
+  signInUser(userNames: string){
+    return userNames;
   }
 
   signUp(email: string, password: string){
@@ -30,12 +27,6 @@ export class AuthService {
       this.login = true;
       this.message = 'Logout';
     }));
-  }
-
-  signInGuest(){
-    this.guest;
-    this.login = true;
-    this.message = 'Logout';
   }
   
   logout(){

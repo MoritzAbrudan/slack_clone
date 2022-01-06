@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
+import { User } from 'src/models/user.class';
 import {AuthService} from "../services/auth.service";
 
 @Component({
@@ -9,12 +11,31 @@ import {AuthService} from "../services/auth.service";
 })
 export class SlackAppComponent implements OnInit {
 
-  constructor(public authService: AuthService, private router: Router) { }
+  userId = '';
+  user: User = new User();
+
+  constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private firestore: AngularFirestore,) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(paramMap => {
+      this.userId = paramMap.get('id');
+      this.getUser();
+    })
     if(!this.authService.login){
       this.router.navigateByUrl('/');
     }
   }
+
+getUser(){
+  if(this.userId){
+    this.firestore
+    .collection('users')
+    .doc(this.userId)
+    .valueChanges()
+    .subscribe((user: any) =>{
+      this.user = new User(user);
+    });
+  }
+}
 
 }

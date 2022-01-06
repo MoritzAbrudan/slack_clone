@@ -11,10 +11,14 @@
         <form [formGroup]="signInForm">
           <mat-form-field class="mt-32 full-width" appearance="outline">
             <mat-label class="full-width">Username</mat-label>
-            <input matInput placeholder="Username" formControlName="email" type="text" required />
+            <input matInput placeholder="Username" formControlName="userNames" type="text" required />
             <mat-icon class="mr-8" matSuffix>mail</mat-icon>
-            <mat-error *ngIf="email?.errors?.['required']"> Email is required</mat-error>
-            <mat-error *ngIf="email?.errors?.['email']"> Please enter a correct email format</mat-error>
+            <mat-error *ngIf="signInForm.hasError('username') && !signInForm.hasError('required')">
+              Please enter a valid Username
+            </mat-error>
+            <mat-error *ngIf="signUpForm.hasError('required')">
+              Username is required
+            </mat-error>
           </mat-form-field>
           <mat-form-field class="full-width" appearance="outline">
             <mat-label>Enter your password</mat-label>
@@ -32,10 +36,9 @@
       </mat-tab>
       <mat-tab label="Registration">
         <form class="mt-32" [formGroup]="signUpForm">
-          <div>
             <mat-form-field class="full-width" appearance="outline">
               <mat-label>Username</mat-label>
-              <input type="text" matInput formControlName="userName" placeholder="Username">
+              <input type="text" matInput formControlName="userNames" placeholder="Username">
               <mat-icon class="mr-8" matSuffix>mode_edit</mat-icon>
               <mat-error *ngIf="signUpForm.hasError('username') && !signUpForm.hasError('required')">
                 Please enter a valid Username
@@ -53,7 +56,6 @@
               <mat-error *ngIf="email?.errors?.['required']"> Email is required</mat-error>
               <mat-error *ngIf="email?.errors?.['email']"> Please enter a correct email format</mat-error>
             </mat-form-field>
-          </div>
 
           <mat-form-field appearance="outline" class="full-width">
             <mat-label>Enter your password</mat-label>
