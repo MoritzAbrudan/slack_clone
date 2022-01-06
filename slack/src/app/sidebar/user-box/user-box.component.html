@@ -1,1 +1,26 @@
-<p>user-box works!</p>
+<div class="menuUserContainerOuter">
+    <div class="menuUserContainerInner">
+        <div class="left">
+            <div>
+                <button mat-icon-button>
+                    <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
+                    <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
+                </button>
+            </div>
+            <div>
+                Users
+            </div>
+        </div>
+    </div>
+    <div class="menuUserContainerList">
+        <div class="list" *ngFor="let user of allUsers">
+            <div class="left">
+                #
+            </div>
+            <div>
+                <!-- USER NAME -->
+                {{ user.userName }}
+            </div>
+        </div>
+    </div>
+</div>
