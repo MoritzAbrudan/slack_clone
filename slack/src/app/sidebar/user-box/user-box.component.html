@@ -14,12 +14,14 @@
     </div>
     <div class="menuUserContainerList">
         <div class="list" *ngFor="let user of allUsers">
-            <div class="left">
-                #
-            </div>
-            <div>
-                <!-- USER NAME -->
-                {{ user.userName }}
+            <div class="link">
+                <div class="left">
+                    #
+                </div>
+                <div>
+                    <!-- USER NAME -->
+                    {{ user.userName }}
+                </div>
             </div>
         </div>
     </div>

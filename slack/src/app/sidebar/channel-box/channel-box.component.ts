@@ -29,4 +29,6 @@ export class ChannelBoxComponent implements OnInit {
     this.dialog.open(DialogAddChannelComponent);
   }
 
+  openChannel(){}
+
 }

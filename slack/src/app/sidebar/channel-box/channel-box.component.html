@@ -19,12 +19,14 @@
     </div>
     <div class="menuChannelContainerList">
         <div class="list" *ngFor="let channel of allChannels">
-            <div class="left">
-                #
-            </div>
-            <div>
-                <!-- CHANNEL NAME -->
-                {{ channel.title }}
+            <div class="link" (click)="openChannel()">
+                <div class="left">
+                    #
+                </div>
+                <div>
+                    <!-- CHANNEL NAME -->
+                    {{ channel.title }}
+                </div>
             </div>
         </div>
     </div>
