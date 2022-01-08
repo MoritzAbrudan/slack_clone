@@ -15,8 +15,10 @@
         </div>
 
         <div>
-          <span>{{ user.userName }}</span>
-          <a href="/" class="header-right">{{authService.message}}</a>
+          <span class="mr-16">{{ user.userName }}</span>
+          <a mat-button target="_blank" href="/" class="header-right">
+            <mat-icon matSuffix>logout</mat-icon>
+            {{authService.message}}</a>
         </div>
 
       </mat-toolbar-row>
