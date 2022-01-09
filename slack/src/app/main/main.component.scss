@@ -1,0 +1,45 @@
+.container{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+.mat-card{
+    margin: 16px;
+}
+
+.container-edit{
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    margin: 16px;
+    border: 2px solid rgba(0, 0, 0, 0.397);
+    border-radius: 5px;
+    padding: unset;
+}
+
+textarea{
+    min-height: 50px;
+    outline: unset;
+    border-bottom: unset;
+    border-left: unset;
+    border-right: unset;
+}
+
+.buttom-bar{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    border-top: 1px solid rgba(0, 0, 0, 0.397);
+
+    mat-icon{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-left: 1px solid rgba(0, 0, 0, 0.397);
+        height: 25px;
+        width: 25px;
+    }
+}

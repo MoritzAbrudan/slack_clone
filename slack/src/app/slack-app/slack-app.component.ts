@@ -17,13 +17,13 @@ export class SlackAppComponent implements OnInit {
   constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private firestore: AngularFirestore,) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(paramMap => {
+    /* this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
       this.getUser();
-    })
-    if(!this.authService.login){
+    }) */
+    /* if(!this.authService.login){
       this.router.navigateByUrl('/');
-    }
+    } */
   }
 
 getUser(){

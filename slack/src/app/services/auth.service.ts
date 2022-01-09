@@ -14,7 +14,7 @@ export class AuthService {
   user = new User();
   message: string = 'Login';
   guest: string = 'Guest';
-  login = false;
+  login = true;
 
   constructor(public _auth: Auth, public firestore: AngularFirestore, public auth: AngularFireAuth) { }
 
