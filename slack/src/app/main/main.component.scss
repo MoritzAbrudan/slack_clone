@@ -5,9 +5,10 @@
 }
 
 .new-message-container {
-  height: 140px;
+  height: 160px;
   display: flex;
   justify-content: center;
+  box-shadow: -2px 0px 10px rgba(0, 0, 0, 0.15);
 }
 
 .new-message-box {
@@ -18,25 +19,61 @@
   border-radius: 10px;
 }
 
-.newMessageInput {
+.new-message-input {
   width: calc(100% - 20px);
+  font-family: Arial;
   font-size: 17px;
   border: 0;
   border-radius: 10px;
   padding: 10px;
 
   &:focus {
-    border: 0px;
+    outline: 1px solid rgba(0, 0, 0, 0.13);
   }
 }
 
+// Icons under messageInput
 .icon-container {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px ;
+  margin-top: 10px;
 
   mat-icon {
-    font-size: 25px;
+    background-color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 30px;
     cursor: pointer;
   }
+}
+
+.add-image-container {
+  display: flex;
+  align-items: center;
+}
+
+.add-image {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 35px;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
+}
+
+.file-name {
+  font-size: 15px;
+  font-weight: 100;
+  margin-left: 10px;
 }
