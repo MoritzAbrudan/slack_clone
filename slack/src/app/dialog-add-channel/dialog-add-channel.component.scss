@@ -1,0 +1,12 @@
+.dialog {
+    min-height: 220px;
+    width: 300px;
+    .container {
+        height: 100%;
+        overflow: hidden;
+        padding-top: 36px;
+        mat-form-field {
+            margin-top: 24px;
+        }
+    }
+}

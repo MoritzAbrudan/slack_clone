@@ -24,9 +24,27 @@ form{
     margin: unset;
 }
 
+mat-toolbar{
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
 mat-card-actions{
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
     margin-left: 0px;
     padding-top: 0px;
+    margin-top: 16px;
+
+    a{
+        margin-top: 16px;
+        color: rgb(0, 0, 255);
+        cursor: pointer;
+
+        &:hover{
+            color: rgb(31, 31, 170);
+            text-decoration: underline;
+        }
+    }
 }

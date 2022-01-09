@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { User } from 'src/models/user.class';
 
 @Component({
   selector: 'app-user-box',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-box.component.scss']
 })
 export class UserBoxComponent implements OnInit {
+  user = new User();
+  dropdown = true;
+  allUsers = [];
 
-  constructor() { }
+  constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    this.firestore
+      .collection('users')
+      .valueChanges({idField: 'customIdName'})
+      .subscribe((changes: any) => {
+        this.allUsers = changes;
+      });      
   }
 
 }
