@@ -1,45 +1,42 @@
-.container{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
+.new-message-section {
+  background-color: rgba(54, 115, 243, 0.02);
+  position: absolute;
+  bottom: 0;
 }
 
-.mat-card{
-    margin: 16px;
+.new-message-container {
+  height: 140px;
+  display: flex;
+  justify-content: center;
 }
 
-.container-edit{
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    margin: 16px;
-    border: 2px solid rgba(0, 0, 0, 0.397);
-    border-radius: 5px;
-    padding: unset;
+.new-message-box {
+  width: 95%;
+  margin: 20px 0px;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
-textarea{
-    min-height: 50px;
-    outline: unset;
-    border-bottom: unset;
-    border-left: unset;
-    border-right: unset;
+.newMessageInput {
+  width: calc(100% - 20px);
+  font-size: 17px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px;
+
+  &:focus {
+    border: 0px;
+  }
 }
 
-.buttom-bar{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    border-top: 1px solid rgba(0, 0, 0, 0.397);
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px ;
 
-    mat-icon{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-left: 1px solid rgba(0, 0, 0, 0.397);
-        height: 25px;
-        width: 25px;
-    }
+  mat-icon {
+    font-size: 25px;
+    cursor: pointer;
+  }
 }

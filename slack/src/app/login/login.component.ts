@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { user } from 'rxfire/auth';
 import { User } from 'src/models/user.class';
 import { AuthService } from '../services/auth.service';
 
@@ -158,6 +157,5 @@ export class LoginComponent implements OnInit {
       }
       this.loading = false;
     });
-
   }
 }
