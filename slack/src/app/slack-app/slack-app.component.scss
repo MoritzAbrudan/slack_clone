@@ -1,3 +1,7 @@
+.sidenav-mat-drawer {
+  box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
 .mat-drawer-container {
   height: 100vh;
 }
@@ -30,16 +34,16 @@
   color: white;
   border: 2px solid transparent;
 
-  &:hover{
+  &:hover {
     transform: scale(1.05);
     border: 2px solid white;
   }
 }
 
-.mat-icon{
+.mat-icon {
   height: 28px;
 }
 
-.d-none{
+.d-none {
   display: none;
 }

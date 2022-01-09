@@ -1,0 +1,42 @@
+.new-message-section {
+  background-color: rgba(54, 115, 243, 0.02);
+  position: absolute;
+  bottom: 0;
+}
+
+.new-message-container {
+  height: 140px;
+  display: flex;
+  justify-content: center;
+}
+
+.new-message-box {
+  width: 95%;
+  margin: 20px 0px;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.newMessageInput {
+  width: calc(100% - 20px);
+  font-size: 17px;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px;
+
+  &:focus {
+    border: 0px;
+  }
+}
+
+.icon-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px ;
+
+  mat-icon {
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
