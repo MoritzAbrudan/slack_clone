@@ -86,6 +86,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     MatDialogModule,
     AngularFireDatabaseModule,
     AngularFireStorageModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
