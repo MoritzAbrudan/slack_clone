@@ -4,7 +4,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { FileUpload } from '../models/file-upload.model';
+import { FileUpload } from '../../models/file-upload.model';
 
 @Injectable({
   providedIn: 'root'
