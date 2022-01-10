@@ -18,8 +18,8 @@
         </div>
     </div>
     <div class="menuChannelContainerList">
-        <div class="list" *ngFor="let channel of allChannels">
-            <div class="link" (click)="openChannel()">
+        <div class="list" *ngFor="let channel of allChannels; let i = index;">
+            <div class="link" (click)="openChannel(i)">
                 <div class="left">
                     #
                 </div>

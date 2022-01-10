@@ -1,28 +1,35 @@
 <section>
-    <mat-toolbar>
-        <mat-toolbar-row>
-            <textarea class="new-message-input" name="message" id="message" cols="30" rows="1"
-                placeholder="Nachricht hinzufügen" style="resize: none;"></textarea>
 
-            <div class="icon-container">
+    <mat-toolbar class="new-message-section">
 
-                <div class="add-image-container">
+        <mat-toolbar-row class="new-message-container">
 
-                    <label class="add-image">+
-                        <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
-                    </label>
+            <div class="new-message-box">
+                <textarea class="new-message-input" name="message" id="message"
+                    placeholder="Nachricht hinzufügen"></textarea>
 
-                    <div class="file-name" *ngIf="selectedFiles">
-                        <div class="file-name">{{selectedFiles[0].name}}</div>
+                <div class="icon-container">
+
+                    <div class="add-image-container">
+
+                        <label class="add-image">+
+                            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
+                        </label>
+
+                        <div class="file-name" *ngIf="selectedFiles">
+                            <div class="file-name">{{selectedFiles[0].name}}</div>
+                        </div>
+
+
                     </div>
 
+                    <mat-icon (click)="upload()">send</mat-icon>
 
                 </div>
 
-                <mat-icon (click)="upload()">send</mat-icon>
+
 
             </div>
-
         </mat-toolbar-row>
 
     </mat-toolbar>
