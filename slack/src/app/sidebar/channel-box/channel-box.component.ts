@@ -18,28 +18,23 @@ export class ChannelBoxComponent implements OnInit {
 
   constructor(private firestore: AngularFirestore, public dialog: MatDialog, private route: ActivatedRoute, public channelService: ChannelService) { }
 
-  ngOnInit(): void {
-    this.firestore
+  async ngOnInit() {
+    await this.firestore
       .collection('channels')
-      .valueChanges({idField: 'customIdName'})
+      .valueChanges({ idField: 'customIdChannel' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
+        this.channelService.channelID = changes.idField;
+        console.log(this.allChannels);
       });
-    this.route.paramMap.subscribe(paramMap => {
-      this.channelService.channelID = paramMap.get('id');
-      this.getChannel();
-    })
   }
 
-  openDialog(){
+  openDialog() {
     this.dialog.open(DialogAddChannelComponent);
   }
 
-  openChannel(){}
-
-  getChannel(){
-    this.firestore
-    .collection('channels')
-    .doc(this.channelService.channelID)
+  openChannel() {
+    console.log("Channel ID is ",this.channelService.channelID);
   }
+
 }

@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ChannelService {
 
-  channelID: string = '';
+  channelID;
 
   getChannel(){
     return this.channelID;
