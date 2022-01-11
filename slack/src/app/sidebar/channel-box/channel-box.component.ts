@@ -34,8 +34,11 @@ export class ChannelBoxComponent implements OnInit {
   }
 
   openChannel(i) {
-      console.log("Channel ID is ", this.allChannels[i]['customIdChannel']);
-    
+      console.log("Channel ID is ", this.allChannels[i]['customIdChannel']); 
+  }
+
+  seeDropdown() {
+    this.dropdown = !this.dropdown;
   }
 
 }
