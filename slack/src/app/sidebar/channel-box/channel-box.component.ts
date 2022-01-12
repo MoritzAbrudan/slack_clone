@@ -3,8 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DialogAddChannelComponent } from 'src/app/dialog-add-channel/dialog-add-channel.component';
 import { Channel } from 'src/models/channel.class';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, RouteConfigLoadEnd } from '@angular/router';
 import { ChannelService } from 'src/app/services/channel.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-channel-box',
@@ -16,7 +16,7 @@ export class ChannelBoxComponent implements OnInit {
   dropdown = true;
   allChannels = [];
 
-  constructor(private firestore: AngularFirestore, public dialog: MatDialog, private route: ActivatedRoute, public channelService: ChannelService) { }
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog, public channelService: ChannelService) { }
 
   async ngOnInit() {
     await this.firestore
@@ -24,8 +24,6 @@ export class ChannelBoxComponent implements OnInit {
       .valueChanges({ idField: 'customIdChannel' })
       .subscribe((changes: any) => {
         this.allChannels = changes;
-        this.channelService.channelID = changes.customIdChannel;
-        console.log(this.allChannels);
       });
   }
 
@@ -35,7 +33,7 @@ export class ChannelBoxComponent implements OnInit {
 
   openChannel(i) {
       console.log("Channel ID is ", this.allChannels[i]['customIdChannel']);
-    
+      this.channelService.data$.next(this.allChannels[i]['title']);
   }
 
 }

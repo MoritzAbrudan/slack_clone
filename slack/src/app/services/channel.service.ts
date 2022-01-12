@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChannelService {
-
-  channelID;
-
-  getChannel(){
-    return this.channelID;
-  }
+  
+  public data$: BehaviorSubject<any> = new BehaviorSubject('');
 
   constructor() { }
 }

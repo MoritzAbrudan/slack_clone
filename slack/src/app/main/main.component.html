@@ -1,6 +1,16 @@
 <section>
 
     <mat-toolbar class="new-message-section">
+        <div class="channel" *ngFor="let message of question">
+            <div class="channel-name">
+                {{ channel }}
+            </div>
+            <mat-card [class.d-none]="!show" class="message-container">
+                <div class="messages">
+                    {{ message.message}}
+                </div>
+            </mat-card>
+        </div>
 
         <mat-toolbar-row class="new-message-container">
 
@@ -26,8 +36,6 @@
                     <mat-icon (click)="upload()">send</mat-icon>
 
                 </div>
-
-
 
             </div>
         </mat-toolbar-row>

@@ -1,13 +1,39 @@
 .new-message-section {
   background-color: #fafafa;
-  position: absolute;
-  bottom: 0;
 }
 
 .new-message-container {
+  position: absolute;
+  bottom: 0;
   height: 180px;
   display: flex;
   justify-content: center;
+}
+
+.channel{
+  height: calc(100vh - 180px);
+  display: flex;
+  justify-content: center;
+}
+
+.channel-name{
+  width: 100%;
+  margin-left: 32px;
+  margin-top: 32px;
+}
+
+.message-container{
+  display: flex;
+  justify-content: center;
+  min-height: 60px;
+  width: 95%;
+  position: absolute;
+  bottom: 200px;
+}
+
+.messages{
+  width: 100%;
+  text-align: left;
 }
 
 .new-message-box {
@@ -22,7 +48,7 @@
 
 .new-message-input {
   width: calc(100% - 20px);
-  height: 40px;
+  min-height: 40px;
   font-family: Arial;
   font-size: 17px;
   border: 0;
@@ -78,4 +104,8 @@
   font-size: 15px;
   font-weight: 100;
   margin-left: 10px;
+}
+
+.d-none{
+  display: none;
 }
