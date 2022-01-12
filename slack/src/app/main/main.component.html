@@ -5,11 +5,16 @@
             <div class="channel-name">
                 {{ channel }}
             </div>
-            <mat-card [class.d-none]="!show" class="message-container">
-                <div class="messages">
-                    {{ message.message}}
+            <div class="message-container">
+                <div class="user-name">
+                    {{ message.message_user }}
                 </div>
-            </mat-card>
+                <mat-card [class.d-none]="!show">
+                    <div class="messages">
+                        {{ message.message}}
+                    </div>
+                </mat-card>
+            </div>
         </div>
 
         <mat-toolbar-row class="new-message-container">

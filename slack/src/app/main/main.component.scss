@@ -17,18 +17,30 @@
 }
 
 .channel-name{
-  width: 100%;
-  margin-left: 32px;
+  width: 90%;
   margin-top: 32px;
 }
 
 .message-container{
+  width: 100%;
   display: flex;
-  justify-content: center;
-  min-height: 60px;
-  width: 95%;
+  align-items: center;
+  flex-direction: column;
   position: absolute;
   bottom: 200px;
+}
+
+.user-name{
+  font-size: 16px;
+  color: blue;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+mat-card{
+  min-height: 60px;
+  width: 90%;
 }
 
 .messages{
