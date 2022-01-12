@@ -2,7 +2,7 @@
     <div class="menuChannelContainerInner">
         <div class="left">
             <div>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="seeDropdown()">
                     <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
                     <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
                 </button>
@@ -17,7 +17,7 @@
             </button>
         </div>
     </div>
-    <div class="menuChannelContainerList">
+    <div [class.d-none]="!dropdown">
         <div class="list" *ngFor="let channel of allChannels; let i = index;">
             <div class="link" (click)="openChannel(i)">
                 <div class="left">

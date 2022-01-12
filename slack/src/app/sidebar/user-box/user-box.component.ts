@@ -17,10 +17,18 @@ export class UserBoxComponent implements OnInit {
   ngOnInit(): void {
     this.firestore
       .collection('users')
-      .valueChanges({idField: 'customIdName'})
+      .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allUsers = changes;
-      });      
+      });
+  }
+
+  openUser(i) {
+    console.log("Channel ID is ", this.allUsers[i]['customIdName']);
+  }
+
+  seeDropdown() {
+    this.dropdown = !this.dropdown;
   }
 
 }

@@ -1,31 +1,36 @@
 <mat-drawer-container [class.d-none]="!authService.login" class="mat-drawer-container" autosize>
 
-  <mat-drawer #drawer class="sidenav-mat-drawer" [opened]="true" mode="side">
-    <app-sidebar></app-sidebar>
-  </mat-drawer>
+    <mat-drawer #drawer class="sidenav-mat-drawer" mode="side" opened="true">
+        <app-sidebar></app-sidebar>
+    </mat-drawer>
 
-  <div class="example-sidenav-content">
-    <mat-toolbar color="primary">
-      <mat-toolbar-row class="header-container">
+    <div class="example-sidenav-content">
+        <mat-toolbar color="primary">
+            <mat-toolbar-row class="header-container">
 
-        <div class="header-left">
-          <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
-          <img class="header-logo" src="assets/favicons/favicon-96x96.png">
-          <span>Slack-Clone</span>
-        </div>
+                <div class="header-left">
+                    <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+                    <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+                    <span>Slack-Clone</span>
+                </div>
 
-        <div>
-          <span class="mr-16">{{ user.userName }}</span>
-          <a mat-button target="_blank" (click)="logOut()" class="header-right">
-            <mat-icon matSuffix>logout</mat-icon>
-            {{authService.message}}</a>
-        </div>
+                <div>
+                    <span class="mr-16">{{ user.userName }}</span>
+                    <a mat-button target="_blank" (click)="logOut()" class="header-right">
+                        <mat-icon matSuffix>logout</mat-icon>
+                        {{authService.message}}
+                    </a>
+                </div>
 
-      </mat-toolbar-row>
-    </mat-toolbar>
+            </mat-toolbar-row>
+        </mat-toolbar>
 
-    <app-main></app-main>
+        <app-main></app-main>
 
-  </div>
+    </div>
+
+    <mat-drawer #thread class="sidenav-mat-drawer" mode="side" position="end" [opened]="threadService.opened">
+        <app-threat-bar></app-threat-bar>
+    </mat-drawer>
 
 </mat-drawer-container>

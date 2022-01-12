@@ -2,7 +2,7 @@
     <div class="menuUserContainerInner">
         <div class="left">
             <div>
-                <button mat-icon-button>
+                <button mat-icon-button (click)="seeDropdown()">
                     <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
                     <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
                 </button>
@@ -12,9 +12,9 @@
             </div>
         </div>
     </div>
-    <div class="menuUserContainerList">
-        <div class="list" *ngFor="let user of allUsers">
-            <div class="link">
+    <div class="menuUserContainerList" [class.d-none]="!dropdown">
+        <div class="list" *ngFor="let user of allUsers; let i = index;">
+            <div class="link" (click)="openUser(i)">
                 <div class="left">
                     #
                 </div>
