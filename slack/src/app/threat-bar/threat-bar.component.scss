@@ -5,6 +5,14 @@
     justify-content: space-between;
     align-items: center;
     font-size: 20px;
+    .headline {
+        display: flex;
+        align-items: baseline;
+    }
+    .headline-small {
+        padding-left: 6px;
+        font-size: 12px;
+    }
 }
 
 .new-message-section {

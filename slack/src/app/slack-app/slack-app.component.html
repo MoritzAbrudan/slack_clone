@@ -29,7 +29,7 @@
 
     </div>
 
-    <mat-drawer #thread class="sidenav-mat-drawer" mode="side" position="end" opened="false">
+    <mat-drawer #thread class="sidenav-mat-drawer" mode="side" position="end" [opened]="threadService.opened">
         <app-threat-bar></app-threat-bar>
     </mat-drawer>
 
