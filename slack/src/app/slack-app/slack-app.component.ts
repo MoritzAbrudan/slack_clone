@@ -16,9 +16,6 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
   userId = '';
   user: User = new User();
 
-<<<<<<< HEAD
-  constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private firestore: AngularFirestore) {
-=======
   @ViewChild('thread') thread: MatDrawer;
 
   constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private firestore: AngularFirestore, public threadService: ThreadService) {
@@ -27,22 +24,16 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.thread.opened = this.threadService.opened;
     // console.log(this.thread);
->>>>>>> c1883d2d92cb843221db4a9f40dfaa88bed94721
   }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
       this.getUser();
-<<<<<<< HEAD
-    });
-    /* if(!this.authService.login){
-=======
     })
-    if (!this.authService.login) {
->>>>>>> c1883d2d92cb843221db4a9f40dfaa88bed94721
+    /* if (!this.authService.login) {
       this.router.navigateByUrl('/');
-    } */
+    }  */
   }
 
   getUser() {
