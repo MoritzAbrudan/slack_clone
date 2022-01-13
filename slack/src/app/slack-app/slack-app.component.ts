@@ -11,6 +11,7 @@ import { ThreadService } from '../services/thread.service';
   templateUrl: './slack-app.component.html',
   styleUrls: ['./slack-app.component.scss']
 })
+
 export class SlackAppComponent implements OnInit, AfterViewInit {
 
   userId = '';
@@ -55,4 +56,5 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
     this.router.navigateByUrl('/');
     this.authService.login = false;
   }
+
 }

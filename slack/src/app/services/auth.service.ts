@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
 import { from } from 'rxjs';
 import { User } from 'src/models/user.class';
 
