@@ -6,7 +6,9 @@ import {FileUpload} from 'src/models/file-upload.model';
 import {Message} from 'src/models/message.class';
 import {ChannelService} from '../services/channel.service';
 
-import {addDoc, collection, getFirestore} from "@angular/fire/firestore";
+import {addDoc, collection, doc, getDoc, getDocFromServer, getFirestore} from "@angular/fire/firestore";
+import {ThreadService} from "../services/thread.service";
+import {log} from "util";
 
 @Component({
   selector: 'app-main',
@@ -19,9 +21,9 @@ export class MainComponent implements OnInit {
   percentage = 0;
 
   channel = '';
-  question = [];
+  questions = [];
   show = false;
-  message = new Message();
+  newMessage = new Message();
 
   fileUpload!: FileUpload;
   files;
@@ -30,7 +32,8 @@ export class MainComponent implements OnInit {
               private fileList: FileUploadService, //?????????
               private route: ActivatedRoute,
               private firestore: AngularFirestore,
-              public channelService: ChannelService) {
+              public channelService: ChannelService,
+              public threadService: ThreadService) {
   }
 
   ngOnInit(): void {
@@ -46,15 +49,19 @@ export class MainComponent implements OnInit {
         .valueChanges()
         .subscribe((msg: any) => {
           console.log(msg);
-          this.question = msg;
+          this.questions = msg;
           this.show = true;
         });
     });
+  }
 
+  goToThread(message) {
+    console.log('goToThread message=', message)
+    this.threadService.opened = true          //open Thread
   }
 
   setMessage(value) {
-    this.message.question = value;
+    this.newMessage.question = value;
   }
 
   saveMessage() {
@@ -62,20 +69,14 @@ export class MainComponent implements OnInit {
       this.upload()
     }
     this.saveMessageToFirestore()
+      .then(() => console.log('Message in Firestore gespeichert'))
   }
 
   async saveMessageToFirestore() {
-    console.log('channel', this.channel)
-    console.log('message', this.message.toJSON())
-    const docRef = await addDoc(collection(getFirestore(), `channels/${this.channel['channelId']}/messages`), this.message.toJSON())
-    console.log('message id', docRef.id)
+    await addDoc(collection(getFirestore(), `channels/${this.channel['channelId']}/messages`), this.newMessage.toJSON())
   }
 
-  /*getFilesFromFire() {
-    this.files =this.fileList.getFiles(1);
-    console.log(this.files)
-  }*/
-
+  // Fire Storage
   selectFile(event: any): void {
     this.selectedFiles = event.target.files;
     console.log(this.selectedFiles)

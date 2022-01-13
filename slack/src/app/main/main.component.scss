@@ -2,40 +2,61 @@
   background-color: #fafafa;
 }
 
-.channel{
-  display: flex;
-  justify-content: center;
-}
-
-.channel-name{
+.channel-name {
   width: 90%;
   margin: 20px 10px 10px 20px;
 }
 
-.message-container{
-  width: 100%;
+.message-box {
   display: flex;
+  justify-content: center;
+  margin: 10px 0px;
+}
+
+.message-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
 }
 
-.user-name{
-  font-size: 16px;
-  color: blue;
+.message-user-container {
+  width: 100%;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.message-user-pic {
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.message-user-name {
+  font-size: 15px;
+  color: var(--primary-darker-color);
   width: 90%;
   display: flex;
   justify-content: flex-start;
 }
 
-mat-card{
-  min-height: 60px;
-  width: 90%;
+mat-card {
+  min-height: 16px;
+  width: 100%;
+  padding: 8px;
+  cursor: pointer;
 }
 
-.messages{
+.message {
   width: 100%;
-  text-align: left;
+  font-size: 15px;
+  font-weight: 200;
+  line-height: 20px;
 }
+
 /*-------------------New Message------------------------*/
 .new-message-container {
   position: absolute;
@@ -44,6 +65,7 @@ mat-card{
   display: flex;
   justify-content: center;
 }
+
 .new-message-box {
   background-color: rgba(54, 115, 243, 0.05);
   width: 95%;
@@ -114,6 +136,6 @@ mat-card{
   margin-left: 10px;
 }
 
-.d-none{
+.d-none {
   display: none;
 }

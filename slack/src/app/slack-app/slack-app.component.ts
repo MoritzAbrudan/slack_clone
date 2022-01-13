@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -18,12 +18,15 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('thread') thread: MatDrawer;
 
-  constructor(public authService: AuthService, private router: Router, private route: ActivatedRoute, private firestore: AngularFirestore, public threadService: ThreadService) {
+  constructor(public authService: AuthService,
+              private router: Router,
+              private route: ActivatedRoute,
+              private firestore: AngularFirestore,
+              public threadService: ThreadService) {
   }
 
   ngAfterViewInit(): void {
     this.thread.opened = this.threadService.opened;
-    // console.log(this.thread);
   }
 
   ngOnInit(): void {
