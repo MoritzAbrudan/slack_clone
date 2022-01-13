@@ -1,50 +1,60 @@
 <section>
 
-    <mat-toolbar class="new-message-section">
-        <div class="channel" *ngFor="let message of question">
-            <div class="channel-name">
-                {{ channel }}
+  <mat-toolbar class="new-message-section">
+
+    <div class="channel-name">
+      {{ channel['channelTitle'] }}
+    </div>
+
+    <div class="channel" *ngFor="let message of question">
+      <div class="message-container">
+        <div class="user-name">
+          {{ message.user }}
+        </div>
+        <mat-card [class.d-none]="!show">
+          <div class="messages">
+            {{ message.question}}
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
+
+    <mat-toolbar-row class="new-message-container">
+
+      <div class="new-message-box">
+                <textarea #message
+                          class="new-message-input"
+                          name="message"
+                          id="message"
+                          placeholder="Nachricht hinzufügen"
+                          (input)="setMessage(message.value)"></textarea>
+
+        <div class="icon-container">
+
+          <div class="add-image-container">
+
+            <label class="add-image">+
+              <input type="file"
+                     id="file"
+                     (change)="selectFile($event)"
+                     name="image"
+                     autocomplete="off">
+            </label>
+
+            <div class="file-name" *ngIf="selectedFiles">
+              <div class="file-name">{{selectedFiles[0].name}}</div>
             </div>
-            <div class="message-container">
-                <div class="user-name">
-                    {{ message.message_user }}
-                </div>
-                <mat-card [class.d-none]="!show">
-                    <div class="messages">
-                        {{ message.message}}
-                    </div>
-                </mat-card>
-            </div>
+
+          </div>
+
+          <mat-icon (click)="saveMessage()">send</mat-icon>
+
         </div>
 
-        <mat-toolbar-row class="new-message-container">
+      </div>
+    </mat-toolbar-row>
 
-            <div class="new-message-box">
-                <textarea class="new-message-input" name="message" id="message"
-                    placeholder="Nachricht hinzufügen"></textarea>
-
-                <div class="icon-container">
-
-                    <div class="add-image-container">
-
-                        <label class="add-image">+
-                            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
-                        </label>
-
-                        <div class="file-name" *ngIf="selectedFiles">
-                            <div class="file-name">{{selectedFiles[0].name}}</div>
-                        </div>
-
-
-                    </div>
-
-                    <mat-icon (click)="upload()">send</mat-icon>
-
-                </div>
-
-            </div>
-        </mat-toolbar-row>
-
-    </mat-toolbar>
+  </mat-toolbar>
 
 </section>
