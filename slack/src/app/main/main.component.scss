@@ -2,11 +2,18 @@
   background-color: #fafafa;
 }
 
-.channel-name {
-  width: 90%;
-  margin: 20px 10px 10px 20px;
+//Channel Name
+.channel-name-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0px 5px 0px;
 }
 
+.channel-name {
+  width: 90%;
+}
+
+//Message box with name
 .message-box {
   display: flex;
   justify-content: center;
@@ -124,10 +131,16 @@ mat-card {
   border-radius: 50%;
   font-size: 35px;
   cursor: pointer;
+  margin-right: 10px;
 
   input {
     display: none;
   }
+}
+
+.file-name-container {
+  display: flex;
+  align-items: center;
 }
 
 .file-name {

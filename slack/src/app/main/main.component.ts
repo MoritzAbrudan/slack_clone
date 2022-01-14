@@ -28,6 +28,9 @@ export class MainComponent implements OnInit {
   fileUpload!: FileUpload;
   files;
 
+  imgSrc: string = ''
+  selectedImage: any = null;
+
   constructor(private uploadService: FileUploadService,
               private fileList: FileUploadService, //?????????
               private route: ActivatedRoute,
@@ -78,8 +81,17 @@ export class MainComponent implements OnInit {
 
   // Fire Storage
   selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles)
+    console.log(event)
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+
+      this.selectedFiles = event.target.files;
+    } else {
+      this.selectedImage = null;
+    }
   }
 
   upload(): void {

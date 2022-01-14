@@ -2,8 +2,10 @@
 
   <mat-toolbar class="new-message-section">
 
-    <div class="channel-name">
-      {{ channel['channelTitle'] }}
+    <div class="channel-name-container">
+      <div class="channel-name">
+        {{ channel['channelTitle'] }}
+      </div>
     </div>
 
     <div class="message-box" *ngFor="let message of questions">
@@ -11,7 +13,7 @@
 
         <div class="message-user-container">
           <img class="message-user-pic"
-               src="./assets/img/profile_Pic_gray.png"
+               src="https://firebasestorage.googleapis.com/v0/b/slack-clone-4c957.appspot.com/o/uploads%2FBasti%20Profilbild%20Mathema%2003.jpg?alt=media&token=3d1e298a-1841-48e0-a25f-f0bcca1c3cbe"
                alt="Pic">
           <div class="message-user-name">
             {{ message.user }}
@@ -49,7 +51,8 @@
                      autocomplete="off">
             </label>
 
-            <div class="file-name" *ngIf="selectedFiles">
+            <div class="file-name-container" *ngIf="selectedFiles">
+              <img [src]="imgSrc" class="file-preview" width="50px" height="50px" >
               <div class="file-name">{{selectedFiles[0].name}}</div>
             </div>
 
