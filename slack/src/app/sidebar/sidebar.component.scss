@@ -1,24 +1,27 @@
 .sidebar-container {
-    height: calc(100vh - 64px);
-    width: 250px;
+  height: calc(100vh - 64px);
+  width: 250px;
 }
 
 .sidebar-head {
-    height: 64px;
+  height: 64px;
+  font-size: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    height: 50px;
+    width: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    button {
-        height: 50px;
-        width: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 10px;
-    }
+    margin-left: 10px;
+  }
 }
 
 .sidebar {
-    background-color: rgba(54, 115, 243, 0.05);
-    height: 100%;
+  background-color: rgba(54, 115, 243, 0.05);
+  height: 100%;
 }
