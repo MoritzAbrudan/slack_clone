@@ -6,9 +6,9 @@ import {FileUpload} from 'src/models/file-upload.model';
 import {Message} from 'src/models/message.class';
 import {ChannelService} from '../services/channel.service';
 
-import {addDoc, collection, doc, getDoc, getDocFromServer, getFirestore} from "@angular/fire/firestore";
+import {addDoc, collection, getFirestore} from "@angular/fire/firestore";
 import {ThreadService} from "../services/thread.service";
-import {log} from "util";
+
 
 @Component({
   selector: 'app-main',
@@ -19,6 +19,8 @@ export class MainComponent implements OnInit {
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
   percentage = 0;
+  imgSrc: string = ''
+  selectedImage: any = null;
 
   channel = '';
   questions = [];
@@ -28,8 +30,6 @@ export class MainComponent implements OnInit {
   fileUpload!: FileUpload;
   files;
 
-  imgSrc: string = ''
-  selectedImage: any = null;
 
   constructor(private uploadService: FileUploadService,
               private fileList: FileUploadService, //?????????
@@ -79,7 +79,7 @@ export class MainComponent implements OnInit {
     await addDoc(collection(getFirestore(), `channels/${this.channel['channelId']}/messages`), this.newMessage.toJSON())
   }
 
-  // Fire Storage
+  // Firebase Storage
   selectFile(event: any): void {
     console.log(event)
     if (event.target.files && event.target.files[0]) {
