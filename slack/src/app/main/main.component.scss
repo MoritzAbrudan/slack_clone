@@ -71,10 +71,11 @@ mat-card {
   height: 180px;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 
 .new-message-box {
-  background-color: rgba(54, 115, 243, 0.05);
+  background-color: rgb(240, 245, 253);
   width: 95%;
   margin: 20px 0px;
   padding: 15px;
@@ -102,6 +103,7 @@ mat-card {
 .icon-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   mat-icon {
     background-color: white;
@@ -142,9 +144,10 @@ mat-card {
   display: flex;
   align-items: center;
 }
-.file-preview{
-  width:50px;
-  height:50px;
+
+.file-preview {
+  width: 50px;
+  height: 50px;
   object-fit: cover;
 }
 

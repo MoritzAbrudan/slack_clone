@@ -51,8 +51,10 @@
                      autocomplete="off">
             </label>
 
+            <div *ngIf="percentage > 0">{{percentage.toString()}}%</div>
+
             <div class="file-name-container" *ngIf="selectedFiles">
-              <img [src]="imgSrc" class="file-preview"  >
+              <img [src]="imgSrc" class="file-preview">
               <div class="file-name">{{selectedFiles[0].name}}</div>
             </div>
 

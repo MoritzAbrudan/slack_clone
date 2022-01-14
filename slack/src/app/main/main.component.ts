@@ -96,19 +96,22 @@ export class MainComponent implements OnInit {
 
   upload(): void {
     const file: File | null = this.selectedFiles.item(0);
-    this.selectedFiles = undefined;
 
     if (file) {
       this.currentFileUpload = new FileUpload(file);
       this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
         percentage => {
           this.percentage = Math.round(percentage ? percentage : 0);
+          if (percentage == 100) {
+            setTimeout(() => this.percentage = 0, 1000);
+          }
         },
         error => {
           console.log(error);
         }
       );
     }
+    this.selectedFiles = undefined;
   }
 
 }
