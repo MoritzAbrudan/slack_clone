@@ -52,7 +52,6 @@ export class MainComponent implements OnInit {
         .collection(`channels/${this.channel['channelId']}/messages`)
         .valueChanges()
         .subscribe((msg: any) => {
-          console.log(msg);
           this.questions = msg;
           this.show = true;
         });
