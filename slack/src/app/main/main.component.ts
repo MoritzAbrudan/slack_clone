@@ -1,13 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {ActivatedRoute} from '@angular/router';
-import {FileUploadService} from 'src/app/services/file-upload.service';
-import {FileUpload} from 'src/models/file-upload.model';
-import {Message} from 'src/models/message.class';
-import {ChannelService} from '../services/channel.service';
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
+import { FileUploadService } from 'src/app/services/file-upload.service';
+import { FileUpload } from 'src/models/file-upload.model';
+import { Message } from 'src/models/message.class';
+import { ChannelService } from '../services/channel.service';
 
-import {addDoc, collection, getFirestore} from "@angular/fire/firestore";
-import {ThreadService} from "../services/thread.service";
+import { addDoc, collection, getFirestore } from "@angular/fire/firestore";
+import { ThreadService } from "../services/thread.service";
+import { User } from 'src/models/user.class';
+import { AuthService } from '../services/auth.service';
 
 
 @Component({
@@ -26,17 +28,18 @@ export class MainComponent implements OnInit {
   questions = [];
   show = false;
   newMessage = new Message();
+  user: User = new User();
 
   fileUpload!: FileUpload;
   files;
 
 
   constructor(private uploadService: FileUploadService,
-              private fileList: FileUploadService, //?????????
-              private route: ActivatedRoute,
-              private firestore: AngularFirestore,
-              public channelService: ChannelService,
-              public threadService: ThreadService) {
+    private fileList: FileUploadService, //?????????
+    private authService: AuthService,
+    public firestore: AngularFirestore,
+    public channelService: ChannelService,
+    public threadService: ThreadService) {
   }
 
   ngOnInit(): void {
@@ -45,7 +48,6 @@ export class MainComponent implements OnInit {
 
   getChannel() {
     this.channelService.data$.subscribe((data) => {
-      console.log(data)
       this.channel = data;
       this.firestore
         .collection(`channels/${this.channel['channelId']}/messages`)
@@ -72,11 +74,17 @@ export class MainComponent implements OnInit {
       this.upload()
     }
     this.saveMessageToFirestore()
-      .then(() => console.log('Message in Firestore gespeichert'))
+      .then(() => {
+        console.log('Message in Firestore gespeichert');
+      });
   }
 
   async saveMessageToFirestore() {
-    await addDoc(collection(getFirestore(), `channels/${this.channel['channelId']}/messages`), this.newMessage.toJSON())
+    /* await addDoc(collection(getFirestore(), `channels/${this.channel['channelId']}/messages`), this.newMessage.toJSON()); */
+    await this.firestore.collection(`channels/${this.channel['channelId']}/messages`).doc().set({
+      question: this.newMessage.question,
+      user: this.authService.user.userName
+    });
   }
 
   // Firebase Storage

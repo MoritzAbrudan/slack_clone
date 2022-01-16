@@ -35,8 +35,6 @@ export class ChannelBoxComponent implements OnInit {
   }
 
   openChannel(i) {
-    console.log("Channel ID is ", this.allChannels[i]['customIdChannel']);
-    console.log('channel title', this.allChannels[i]['title'])
     this.channelService.data$.next({
       channelTitle: this.allChannels[i]['title'],
       channelId: this.allChannels[i]['customIdChannel']

@@ -11,6 +11,7 @@ import { User } from 'src/models/user.class';
 })
 export class AuthService {
 
+
   user = new User();
   message: string = 'Login';
   guest: string = 'Guest';
@@ -27,5 +28,17 @@ export class AuthService {
       this.login = true;
       this.message = 'Logout';
     }));
+  }
+
+  getUser(userId) {
+    if (userId) {
+      this.firestore
+        .collection('users')
+        .doc(userId)
+        .valueChanges()
+        .subscribe((user: any) => {
+          this.user = new User(user);
+        });
+    }
   }
 }

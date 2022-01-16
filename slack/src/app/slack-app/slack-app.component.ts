@@ -33,23 +33,11 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
-      this.getUser();
+      this.authService.getUser(this.userId);
     })
     /* if (!this.authService.login) {
       this.router.navigateByUrl('/');
     }  */
-  }
-
-  getUser() {
-    if (this.userId) {
-      this.firestore
-        .collection('users')
-        .doc(this.userId)
-        .valueChanges()
-        .subscribe((user: any) => {
-          this.user = new User(user);
-        });
-    }
   }
 
   logOut() {
