@@ -19,6 +19,9 @@
             <div class="message-user-name">
               {{ message.user }}
             </div>
+            <div class="message-time" *ngIf="message['uploadTime']">
+              {{uploadTimeToMessageTime(message['uploadTime'])}}
+            </div>
           </div>
 
           <mat-card (click)="goToThread(message)">

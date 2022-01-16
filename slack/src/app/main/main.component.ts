@@ -64,6 +64,18 @@ export class MainComponent implements OnInit {
     this.threadService.opened = true          //open Thread
   }
 
+  /**
+   * Show Date and Time for showing at message
+   * @param {number} time uploadTime of message
+   * @return {string} eg. 2021-01-16 09:41
+   */
+  uploadTimeToMessageTime(time){
+    const isoTime = new Date(time).toISOString()
+    const date = isoTime.slice(0,10);
+    const timeString = isoTime.slice(11,16)
+    return date + ' / ' + timeString
+  }
+
   setMessage(value) {
     this.newMessage.question = value;
   }
@@ -79,9 +91,11 @@ export class MainComponent implements OnInit {
   }
 
   async saveMessageToFirestore() {
+    const actualTime = new Date().getTime()
     await this.firestore.collection(`channels/${this.channel['channelId']}/messages`)
-      .doc(new Date().getTime().toString())  // Time as DocumentId
+      .doc(actualTime.toString())  // Time as DocumentId
       .set({
+        uploadTime: actualTime,
         question: this.newMessage.question,
         user: this.authService.user.userName
       });

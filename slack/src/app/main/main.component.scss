@@ -49,9 +49,13 @@
 .message-user-name {
   font-size: 15px;
   color: var(--primary-darker-color);
-  width: 90%;
   display: flex;
   justify-content: flex-start;
+}
+
+.message-time {
+  font-size: 12px;
+  margin-left: 10px;
 }
 
 mat-card {
