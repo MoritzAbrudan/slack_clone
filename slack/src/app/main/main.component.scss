@@ -6,8 +6,14 @@
   justify-content: space-between;
 }
 
+.container{
+  height: calc(100vh - 310px);
+  overflow: auto;
+}
+
 //Channel Name
 .channel-name-container {
+  float: right;
   display: flex;
   justify-content: center;
   margin: 20px 0px 5px 0px;

@@ -16,7 +16,7 @@
             <mat-error *ngIf="signInForm.hasError('username') && !signInForm.hasError('required')">
               Please enter a valid Username
             </mat-error>
-            <mat-error *ngIf="signUpForm.hasError('required')">
+            <mat-error *ngIf="signInForm.hasError('required')">
               Username is required
             </mat-error>
           </mat-form-field>

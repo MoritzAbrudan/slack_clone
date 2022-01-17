@@ -93,22 +93,9 @@ export class LoginComponent implements OnInit {
 
   async loginUser() {
     const { userNames, password } = this.signInForm.value;
-    this.authService.signInUser(userNames);
-    await this.firestore.collection('users').valueChanges({ idField: 'id' }).subscribe((result) => {
-      for (let i = 0; i < result.length; i++) {
-        if (result[i]['userName'] == this.authService.signInUser(userNames)) {
-          this.authService.login = true;
-          this.authService.message = 'Logout';
-          this.router.navigateByUrl(`/slack/${result[i]['id']}`);
-        }
-      }
-      this.loading = false;
-    }, (error) => {
-      if (error.code === 'auth/wrong-password') this.msg.open('Wrong Password!', 'Try Again');
-      else if (error.code === 'auth/user-not-found') this.msg.open('User not found', 'Register please');
-      else this.msg.open(error, 'Close');
-      this.loading = false;
-    });
+
+    await this.authService.signInUser(userNames, password);
+    this.loading = false;
   }
 
   /**
@@ -147,15 +134,7 @@ export class LoginComponent implements OnInit {
   }
 
   async loginGuest() {
-    await this.firestore.collection('users').valueChanges({ idField: 'id' }).subscribe((result) => {
-      for (let i = 0; i < result.length; i++) {
-        if (result[i]['userName'] == this.authService.guest) {
-          this.authService.login = true;
-          this.authService.message = 'Logout';
-          this.router.navigateByUrl(`/slack/${result[i]['id']}`);
-        }
-      }
-      this.loading = false;
-    });
+    await this.authService.guestLogin();
+    this.loading = false;
   }
 }

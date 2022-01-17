@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 })
 export class ThreadService {
 
-  opened: boolean = true;
+  opened: boolean = false;
   public data$: BehaviorSubject<any> = new BehaviorSubject('');
 
   constructor() { }
