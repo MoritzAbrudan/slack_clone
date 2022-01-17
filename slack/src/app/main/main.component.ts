@@ -68,10 +68,10 @@ export class MainComponent implements OnInit {
    * @param {number} time uploadTime of message
    * @return {string} eg. 2021-01-16 09:41
    */
-  uploadTimeToMessageTime(time){
+  uploadTimeToMessageTime(time) {
     const isoTime = new Date(time).toISOString()
-    const date = isoTime.slice(0,10);
-    const timeString = isoTime.slice(11,16)
+    const date = isoTime.slice(0, 10);
+    const timeString = isoTime.slice(11, 16)
     return date + ' / ' + timeString
   }
 
@@ -83,10 +83,12 @@ export class MainComponent implements OnInit {
     if (this.selectedFiles) {
       this.upload()
     }
-    this.saveMessageToFirestore()
-      .then(() => {
-        console.log('Message in Firestore gespeichert');
-      });
+    if (this.newMessage.question.length > 0) {
+      this.saveMessageToFirestore()
+        .then(() => {
+          console.log('Message in Firestore gespeichert');
+        });
+    }
   }
 
   async saveMessageToFirestore() {
