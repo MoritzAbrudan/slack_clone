@@ -1,38 +1,56 @@
 <div class="header">
-    <div class="headline">
-        <div>
-            Thread
-        </div>
-        <div class="headline-small">
-            Channel Name
-        </div>
+  <div class="headline">
+    <div>
+      Thread
     </div>
-    <button mat-icon-button (click)="closeThread()">
-        <mat-icon>close</mat-icon>
-    </button>
+    <div class="headline-small">
+      Channel Name
+    </div>
+  </div>
+  <button mat-icon-button (click)="closeThread()">
+    <mat-icon>close</mat-icon>
+  </button>
 </div>
 
-<section>
 
-</section>
+<mat-toolbar class="message-section">
 
-<section>
-    <mat-toolbar class="new-message-section">
-        <mat-toolbar-row class="new-message-container">
-            <div class="new-message-box">
-                <textarea class="new-message-input" name="message" id="message" placeholder="Nachricht hinzufügen"></textarea>
-                <div class="icon-container">
-                    <div class="add-image-container">
-                        <label class="add-image">+
-                            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
-                        </label>
-                        <div class="file-name" *ngIf="selectedFiles">
-                            <div class="file-name">{{selectedFiles[0].name}}</div>
-                        </div>
-                    </div>
-                    <mat-icon (click)="upload()">send</mat-icon>
-                </div>
-            </div>
-        </mat-toolbar-row>
-    </mat-toolbar>
-</section>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+  <div>message</div>
+
+  <mat-toolbar-row class="new-message-container">
+    <div class="new-message-box">
+      <textarea class="new-message-input" name="message" id="message" placeholder="Nachricht hinzufügen"></textarea>
+      <div class="icon-container">
+        <div class="add-image-container">
+          <label class="add-image">+
+            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
+          </label>
+          <div class="file-name" *ngIf="selectedFiles">
+            <div class="file-name">{{selectedFiles[0].name}}</div>
+          </div>
+        </div>
+        <mat-icon (click)="upload()">send</mat-icon>
+      </div>
+    </div>
+  </mat-toolbar-row>
+
+</mat-toolbar>
+

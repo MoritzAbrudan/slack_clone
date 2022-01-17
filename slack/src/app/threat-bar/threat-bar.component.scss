@@ -1,77 +1,72 @@
 .header {
-    height: 32px;
-    padding: 16px;
+  background-color: white;
+  height: 32px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  position: sticky;
+  top: 0;
+
+  .headline {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    .headline {
-        display: flex;
-        align-items: baseline;
-    }
-    .headline-small {
-        padding-left: 6px;
-        font-size: 12px;
-    }
+    align-items: baseline;
+  }
+
+  .headline-small {
+    padding-left: 6px;
+    font-size: 12px;
+  }
 }
 
 .message-section {
-    background-color: #fafafa;
+  background-color: #fafafa;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .new-message-container {
-    height: 180px;
-    display: flex;
-    justify-content: center;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  position: sticky;
+  bottom: 0;
 }
 
 .new-message-box {
-    background-color: rgba(54, 115, 243, 0.05);
-    width: 95%;
-    margin: 20px 0px;
-    padding: 15px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.03);
+  background-color: #f0f5fd;
+  width: 95%;
+  margin: 20px 0px;
+  padding: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.03);
 }
 
 .new-message-input {
-    width: calc(100% - 20px);
-    height: 40px;
-    font-family: Arial;
-    font-size: 17px;
-    border: 0;
-    border-radius: 10px;
-    resize: none;
-    padding: 10px;
-    &:focus {
-        outline: 1px solid rgba(0, 0, 0, 0.13);
-    }
+  width: calc(100% - 20px);
+  height: 40px;
+  font-family: Arial;
+  font-size: 17px;
+  border: 0;
+  border-radius: 10px;
+  resize: none;
+  padding: 10px;
+
+  &:focus {
+    outline: 1px solid rgba(0, 0, 0, 0.13);
+  }
 }
 
 // Icons under messageInput
 .icon-container {
-    display: flex;
-    justify-content: space-between;
-    mat-icon {
-        background-color: white;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        font-size: 30px;
-        cursor: pointer;
-    }
-}
+  display: flex;
+  justify-content: space-between;
 
-.add-image-container {
-    display: flex;
-    align-items: center;
-}
-
-.add-image {
+  mat-icon {
     background-color: white;
     width: 40px;
     height: 40px;
@@ -79,15 +74,34 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    font-size: 35px;
+    font-size: 30px;
     cursor: pointer;
-    input {
-        display: none;
-    }
+  }
+}
+
+.add-image-container {
+  display: flex;
+  align-items: center;
+}
+
+.add-image {
+  background-color: white;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 35px;
+  cursor: pointer;
+
+  input {
+    display: none;
+  }
 }
 
 .file-name {
-    font-size: 15px;
-    font-weight: 100;
-    margin-left: 10px;
+  font-size: 15px;
+  font-weight: 100;
+  margin-left: 10px;
 }

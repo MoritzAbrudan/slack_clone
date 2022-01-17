@@ -118,7 +118,6 @@ export class MainComponent implements OnInit {
 
   upload(): void {
     const file: File | null = this.selectedFiles.item(0);
-
     if (file) {
       this.currentFileUpload = new FileUpload(file);
       this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
