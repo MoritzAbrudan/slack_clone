@@ -2,13 +2,13 @@
 
   <mat-toolbar class="message-section">
 
-    
-      <div class="channel-name-container">
-        <div class="channel-name">
-          {{ channel['channelTitle'] }}
-        </div>
+
+    <div class="channel-name-container">
+      <div class="channel-name">
+        {{ channel['channelTitle'] }}
       </div>
-      <div class="container">
+    </div>
+    <div class="container">
       <div class="message-box" *ngFor="let message of questions">
         <div class="message-container">
 
@@ -24,10 +24,26 @@
             </div>
           </div>
 
-          <mat-card (click)="goToThread(message)">
-            <div class="message">
-              {{ message.question}}
+          <mat-card>
+
+            <div class="card-message-container">
+              <div *ngIf="message['downloads']">
+                <a class="anhang-link"
+                   href="{{message['downloads']}}"
+                   target="_blank">
+                  <img src="{{message['downloads']}}">
+                </a>
+              </div>
+
+              <div class="message">
+                {{ message.question}}
+              </div>
             </div>
+
+            <mat-icon (click)="goToThread(message)"
+                      class="thread-icon">comment
+            </mat-icon>
+
           </mat-card>
         </div>
 

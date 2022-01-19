@@ -9,6 +9,8 @@ import {ChannelService} from '../services/channel.service';
 import {ThreadService} from "../services/thread.service";
 import {User} from 'src/models/user.class';
 import {AuthService} from '../services/auth.service';
+import {Observable} from "rxjs";
+import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
 
 
 @Component({
@@ -22,15 +24,13 @@ export class MainComponent implements OnInit {
   percentage = 0;
   imgSrc: string = ''
   selectedImage: any = null;
+  downloadURL: string;
 
   channel = '';
   questions = [];
   show = false;
   newMessage = new Message();
   user: User = new User();
-
-  fileUpload!: FileUpload;
-  files;
 
 
   constructor(private uploadService: FileUploadService,
@@ -86,10 +86,19 @@ export class MainComponent implements OnInit {
   saveMessage() {
     if (this.newMessage.question.length > 0) {
       if (this.selectedFiles) {
-        this.upload()
         this.saveMessageToFirestore()
+          .then(() => {
+            this.selectedFiles = undefined;
+            this.newMessage.question = '';
+            this.downloadURL = '';
+          })
+
       } else {
         this.saveMessageToFirestore()
+          .then(() => {
+            this.newMessage.question = '';
+            this.downloadURL = '';
+          })
       }
     }
   }
@@ -98,12 +107,13 @@ export class MainComponent implements OnInit {
    * Save Message in Firestore in collection messages
    */
   async saveMessageToFirestore() {
-    const actualTime = new Date().getTime()
+    const actualTime = new Date().getTime();
     await this.firestore.collection(`channels/${this.channel['channelId']}/messages`)
       .doc(actualTime.toString())  // Time as DocumentId
       .set({
         uploadTime: actualTime,
         question: this.newMessage.question,
+        downloads: this.downloadURL,
         user: this.authService.user.userName
       });
   }
@@ -112,8 +122,7 @@ export class MainComponent implements OnInit {
    * Save selected File in variable selectedFiles
    * @param event
    */
-  selectFile(event: any): void {
-    console.log(event)
+  async selectFile(event: any): Promise<void> {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
       reader.onload = (e: any) => this.imgSrc = e.target.result;
@@ -123,6 +132,9 @@ export class MainComponent implements OnInit {
     } else {
       this.selectedImage = null;
     }
+    await this.upload()
+    const url = await this.getFileUrl(this.downloadURL)
+    this.downloadURL = url;
   }
 
   /**
@@ -130,6 +142,7 @@ export class MainComponent implements OnInit {
    */
   upload(): void {
     const file: File | null = this.selectedFiles.item(0);
+    this.downloadURL = file.name;
     if (file) {
       this.currentFileUpload = new FileUpload(file);
       this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
@@ -138,13 +151,26 @@ export class MainComponent implements OnInit {
           if (percentage == 100) {
             setTimeout(() => this.percentage = 0, 1000);
           }
-        },
-        error => {
+        }, error => {
           console.log(error);
         }
       );
     }
-    this.selectedFiles = undefined;
+  }
+
+  async getFileUrl(fileName: string): Promise<string> {
+    const storage = getStorage();
+    let fileSrc = null;
+    await getDownloadURL(ref(storage, `uploads/${fileName}`))
+      .then((url) => {
+        fileSrc = url
+      })
+      .catch((error) => {
+        console.log('getting file error', error)
+        return 'error'
+      });
+    console.log('fileSrc',fileSrc)
+    return fileSrc
   }
 
 }

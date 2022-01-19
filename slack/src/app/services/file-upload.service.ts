@@ -1,18 +1,22 @@
-import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import {Injectable} from '@angular/core';
+import {AngularFireDatabase, AngularFireList} from '@angular/fire/compat/database';
+import {AngularFireStorage} from '@angular/fire/compat/storage';
 
-import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { FileUpload } from '../../models/file-upload.model';
+import {Observable} from 'rxjs';
+import {finalize} from 'rxjs/operators';
+import {FileUpload} from '../../models/file-upload.model';
+import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
-  private basePath = '/uploads'
+  private basePath = '/uploads';
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) { }
+
+  constructor(private db: AngularFireDatabase,
+              private storage: AngularFireStorage) {
+  }
 
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
@@ -22,6 +26,7 @@ export class FileUploadService {
     uploadTask.snapshotChanges().pipe(
       finalize(() => {
         storageRef.getDownloadURL().subscribe(downloadURL => {
+
           fileUpload.url = downloadURL;
           fileUpload.name = fileUpload.file.name;
           this.saveFileData(fileUpload);
@@ -31,6 +36,7 @@ export class FileUploadService {
 
     return uploadTask.percentageChanges();
   }
+
 
   private saveFileData(fileUpload: FileUpload): void {
     this.db.list(this.basePath).push(fileUpload);

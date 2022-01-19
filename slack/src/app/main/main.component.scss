@@ -6,7 +6,7 @@
   justify-content: space-between;
 }
 
-.container{
+.container {
   height: calc(100vh - 310px);
   overflow: auto;
 }
@@ -64,11 +64,21 @@
   margin-left: 10px;
 }
 
+/*--------Message box------------*/
 mat-card {
   min-height: 16px;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   padding: 8px;
-  cursor: pointer;
+}
+
+.anhang-link {
+  z-index: 2;
+  img {
+    height: 60px;
+    object-fit: cover;
+  }
 }
 
 .message {
@@ -76,6 +86,10 @@ mat-card {
   font-size: 15px;
   font-weight: 200;
   line-height: 20px;
+}
+
+.thread-icon{
+  cursor: pointer;
 }
 
 /*-------------------New Message------------------------*/
