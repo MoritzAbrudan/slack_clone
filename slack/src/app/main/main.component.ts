@@ -132,9 +132,8 @@ export class MainComponent implements OnInit {
     } else {
       this.selectedImage = null;
     }
-    await this.upload()
-    const url = await this.getFileUrl(this.downloadURL)
-    this.downloadURL = url;
+    this.upload()
+    this.getFileUrl(this.downloadURL)
   }
 
   /**
@@ -163,19 +162,16 @@ export class MainComponent implements OnInit {
    * @param {string} fileName
    * @return string
    */
-  async getFileUrl(fileName: string): Promise<string> {
+  getFileUrl(fileName: string): any {
     const storage = getStorage();
-    let fileSrc = null;
-    await getDownloadURL(ref(storage, `uploads/${fileName}`))
+    getDownloadURL(ref(storage, `uploads/${fileName}`))
       .then((url) => {
-        fileSrc = url
+        this.downloadURL = url
       })
       .catch((error) => {
         console.log('getting file error', error)
         return 'error'
       });
-    console.log('fileSrc',fileSrc)
-    return fileSrc
   }
 
 }
