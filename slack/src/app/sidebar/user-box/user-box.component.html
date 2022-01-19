@@ -1,28 +1,28 @@
 <div class="menuUserContainerOuter">
-    <div class="menuUserContainerInner">
+  <div class="menuUserContainerInner">
+    <div class="left">
+      <div>
+        <button mat-icon-button (click)="seeDropdown()">
+          <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
+          <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
+        </button>
+      </div>
+      <div>
+        Users
+      </div>
+    </div>
+  </div>
+  <div class="menuUserContainerList" [class.d-none]="!dropdown">
+    <div class="list" *ngFor="let user of allUsers; let i = index;">
+      <div class="link user-box" (click)="openUser(i)">
         <div class="left">
-            <div>
-                <button mat-icon-button (click)="seeDropdown()">
-                    <mat-icon *ngIf="dropdown">arrow_drop_down</mat-icon>
-                    <mat-icon *ngIf="!dropdown">arrow_right</mat-icon>
-                </button>
-            </div>
-            <div>
-                Users
-            </div>
+          <img class="profile-pic" src="./assets/img/profile_Pic_gray.png">
         </div>
-    </div>
-    <div class="menuUserContainerList" [class.d-none]="!dropdown">
-        <div class="list" *ngFor="let user of allUsers; let i = index;">
-            <div class="link" (click)="openUser(i)">
-                <div class="left">
-                    #
-                </div>
-                <div>
-                    <!-- USER NAME -->
-                    {{ user.userName }}
-                </div>
-            </div>
+        <div>
+          <!-- USER NAME -->
+          {{ user.userName }}
         </div>
+      </div>
     </div>
+  </div>
 </div>

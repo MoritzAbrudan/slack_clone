@@ -24,7 +24,7 @@ export class UserBoxComponent implements OnInit {
   }
 
   openUser(i) {
-    console.log("Channel ID is ", this.allUsers[i]['customIdName']);
+    console.log("User ID is ", this.allUsers[i]['customIdName']);
   }
 
   seeDropdown() {

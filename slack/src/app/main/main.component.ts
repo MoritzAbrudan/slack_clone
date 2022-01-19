@@ -79,18 +79,24 @@ export class MainComponent implements OnInit {
     this.newMessage.question = value;
   }
 
+  /**
+   * Save Message and Upload files by clicking send button
+   * Only working if something is written in input field.
+   */
   saveMessage() {
-    if (this.selectedFiles) {
-      this.upload()
-    }
     if (this.newMessage.question.length > 0) {
-      this.saveMessageToFirestore()
-        .then(() => {
-          console.log('Message in Firestore gespeichert');
-        });
+      if (this.selectedFiles) {
+        this.upload()
+        this.saveMessageToFirestore()
+      } else {
+        this.saveMessageToFirestore()
+      }
     }
   }
 
+  /**
+   * Save Message in Firestore in collection messages
+   */
   async saveMessageToFirestore() {
     const actualTime = new Date().getTime()
     await this.firestore.collection(`channels/${this.channel['channelId']}/messages`)
@@ -102,7 +108,10 @@ export class MainComponent implements OnInit {
       });
   }
 
-  // Firebase Storage
+  /**
+   * Save selected File in variable selectedFiles
+   * @param event
+   */
   selectFile(event: any): void {
     console.log(event)
     if (event.target.files && event.target.files[0]) {
@@ -110,13 +119,15 @@ export class MainComponent implements OnInit {
       reader.onload = (e: any) => this.imgSrc = e.target.result;
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
-
       this.selectedFiles = event.target.files;
     } else {
       this.selectedImage = null;
     }
   }
 
+  /**
+   * Upload File in selectedFiles to Firestore and delete selectedFiles
+   */
   upload(): void {
     const file: File | null = this.selectedFiles.item(0);
     if (file) {
