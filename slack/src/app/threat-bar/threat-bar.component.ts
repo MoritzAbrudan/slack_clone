@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {FileUpload} from 'src/models/file-upload.model';
-import {FileUploadService} from '../services/file-upload.service';
-import {ThreadService} from '../services/thread.service';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {ChannelService} from "../services/channel.service";
+import { Component, OnInit } from '@angular/core';
+import { FileUpload } from 'src/models/file-upload.model';
+import { FileUploadService } from '../services/file-upload.service';
+import { ThreadService } from '../services/thread.service';
+import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { ChannelService } from "../services/channel.service";
+import { Message } from 'src/models/message.class';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-threat-bar',
@@ -13,14 +15,19 @@ import {ChannelService} from "../services/channel.service";
 export class ThreatBarComponent implements OnInit {
 
   thread = '';
+  channel = '';
+  answerMessage = [];
+  downloadURL: string;
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
+  newAnswer = new Message();
   percentage = 0;
 
   constructor(private uploadService: FileUploadService,
-              public threadService: ThreadService,
-              public channelService: ChannelService,
-              private firestore: AngularFirestore) {
+    public threadService: ThreadService,
+    public channelService: ChannelService,
+    private authService: AuthService,
+    private firestore: AngularFirestore) {
   }
 
   ngOnInit(): void {
@@ -30,16 +37,17 @@ export class ThreatBarComponent implements OnInit {
   //TODO
   getThread() {
     this.channelService.data$.subscribe((channelData) => {
+      this.channel = channelData;
       this.threadService.data$.subscribe((threadData) => {
         console.log(threadData)
         this.thread = threadData;
         this.firestore
-          .collection(`channels/${channelData['channelId']}/messages/${this.thread['messageId']}/threads`)
+          .collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageID']}/answers`)
           .valueChanges()
           .subscribe((msg: any) => {
             console.log(msg);
-            /*this.questions = msg;
-            this.show = true;*/
+            this.answerMessage = msg;
+            /* this.show = true; */
           });
       });
     })
@@ -52,6 +60,8 @@ export class ThreatBarComponent implements OnInit {
   }
 
   upload(): void {
+    this.saveAnswer();
+
     if (this.selectedFiles) {
       const file: File | null = this.selectedFiles.item(0);
       this.selectedFiles = undefined;
@@ -68,7 +78,40 @@ export class ThreatBarComponent implements OnInit {
         );
       }
     }
+  }
 
+  saveAnswer() {
+    if (this.newAnswer.answers.length > 0) {
+      if (this.selectedFiles) {
+        this.saveAnswerToFirestore()
+          .then(() => {
+            this.selectedFiles = undefined;
+            this.newAnswer.answers = '';
+          });
+
+      } else {
+        this.saveAnswerToFirestore()
+          .then(() => {
+            this.newAnswer.answers = '';
+          });
+      }
+    }
+  }
+
+  async saveAnswerToFirestore() {
+    const actualTime = new Date().getTime();
+    this.firestore.collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageId']}/answers`)
+      .doc(actualTime.toString())  // Time as DocumentId
+      .set({
+        uploadTime: actualTime,
+        answers: this.newAnswer.answers,
+        downloads: this.downloadURL || null,
+        user: this.authService.user.userName
+      });
+  }
+
+  setAnswer(value) {
+    this.newAnswer.answers = value;
   }
 
   closeThread() {

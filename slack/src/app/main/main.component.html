@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="container">
-      <div class="message-box" *ngFor="let message of questions">
+      <div class="message-box" *ngFor="let message of questions; let i = index;">
         <div class="message-container">
 
           <div class="message-user-container">
@@ -40,7 +40,7 @@
               </div>
             </div>
 
-            <mat-icon (click)="goToThread(message)"
+            <mat-icon (click)="goToThread(i)"
                       class="thread-icon">comment
             </mat-icon>
 

@@ -20,7 +20,7 @@
 
   <mat-toolbar-row class="new-message-container">
     <div class="new-message-box">
-      <textarea class="new-message-input" name="message" id="message" placeholder="Nachricht hinzufügen"></textarea>
+      <textarea class="new-message-input" name="answer" #answer placeholder="Nachricht hinzufügen" (input)="setAnswer(answer.value)"></textarea>
       <div class="icon-container">
         <div class="add-image-container">
           <label class="add-image">+

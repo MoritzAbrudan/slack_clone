@@ -6,7 +6,7 @@ export class Message{
     channel: Channel;
     user: User;
     question: string;
-    answers: [];
+    answers: string;
 
     constructor(obj?: any){
         this.channel = obj ? obj.channel: '';

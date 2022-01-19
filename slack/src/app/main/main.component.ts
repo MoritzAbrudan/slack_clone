@@ -50,7 +50,7 @@ export class MainComponent implements OnInit {
       this.channel = data;
       this.firestore
         .collection(`channels/${this.channel['channelId']}/messages`)
-        .valueChanges()
+        .valueChanges({idField: 'messageId'})
         .subscribe((msg: any) => {
           this.questions = msg;
           this.show = true;
@@ -58,8 +58,11 @@ export class MainComponent implements OnInit {
     });
   }
 
-  goToThread(message) {
-    console.log('goToThread message=', message)
+  goToThread(i) {
+    console.log('goToThread message=', i)
+    this.threadService.data$.next({
+      messageID: this.questions[i]['messageId']
+    });
     this.threadService.opened = true          //open Thread
   }
 
