@@ -113,7 +113,7 @@ export class MainComponent implements OnInit {
       .set({
         uploadTime: actualTime,
         question: this.newMessage.question,
-        downloads: this.downloadURL,
+        downloads: this.downloadURL || null,
         user: this.authService.user.userName
       });
   }
@@ -158,6 +158,11 @@ export class MainComponent implements OnInit {
     }
   }
 
+  /**
+   * Getting download Url from fileName
+   * @param {string} fileName
+   * @return string
+   */
   async getFileUrl(fileName: string): Promise<string> {
     const storage = getStorage();
     let fileSrc = null;
