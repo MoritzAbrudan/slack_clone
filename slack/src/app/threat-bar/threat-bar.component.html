@@ -8,27 +8,40 @@
         </div>
     </div>
     <button mat-icon-button (click)="closeThread()">
-    <mat-icon>close</mat-icon>
-  </button>
+        <mat-icon>close</mat-icon>
+    </button>
 </div>
 
 
 <mat-toolbar class="message-section">
 
-    <div class="thread-container" *ngFor="let answerMessage of answerMessages">
-        <div>
-            {{ answerMessage.answers }} {{ answerMessage.user }}
+    <div class="thread-container">
+        <div class="mb-12" *ngFor="let answerMessage of answerMessages">
+            <div class="thread-user-container">
+                <img class="thread-user-pic" src="./assets/img/profile_Pic_gray.png" alt="Pic">
+                <div class="thrad-user-name">
+                    {{ answerMessage.user }}
+                </div>
+            </div>
+            <mat-card>
+                <div class="card-thread-container">
+                    <div class="thread">
+                        {{ answerMessage.answers }}
+                    </div>
+                </div>
+            </mat-card>
         </div>
     </div>
 
     <mat-toolbar-row class="new-message-container">
         <div class="new-message-box">
-            <textarea class="new-message-input" name="answer" #answer placeholder="Nachricht hinzufügen" (input)="setAnswer(answer.value)"></textarea>
+            <textarea class="new-message-input" name="answer" #answer placeholder="Nachricht hinzufügen"
+                (input)="setAnswer(answer.value)"></textarea>
             <div class="icon-container">
                 <div class="add-image-container">
                     <label class="add-image">+
-            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
-          </label>
+                        <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
+                    </label>
                     <div class="file-name" *ngIf="selectedFiles">
                         <div class="file-name">{{selectedFiles[0].name}}</div>
                     </div>

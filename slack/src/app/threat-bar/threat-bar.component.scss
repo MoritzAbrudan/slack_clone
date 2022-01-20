@@ -105,3 +105,28 @@
   font-weight: 100;
   margin-left: 10px;
 }
+
+.thread-container{
+  padding: 12px;
+}
+
+.thread-user-container {
+  width: 100%;
+  display: flex;
+  margin-bottom: 5px;
+}
+
+.thread-user-pic {
+  height: 30px;
+  width: 30px;
+  border-radius: 5px;
+  object-fit: cover;
+  margin-right: 8px;
+}
+
+.thread-user-name {
+  font-size: 15px;
+  color: var(--primary-darker-color);
+  display: flex;
+  justify-content: flex-start;
+}
