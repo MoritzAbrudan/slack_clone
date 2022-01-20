@@ -55,7 +55,6 @@ export class ThreatBarComponent implements OnInit {
   openAnswers() {
     this.threadService.data$.next({
       answer: this.answerMessages['answer'],
-      // answerId: this.answerMessages[i]['customIdChannel']
     });
   }
 
