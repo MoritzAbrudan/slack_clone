@@ -28,6 +28,8 @@
   justify-content: space-between;
 }
 
+
+
 .new-message-container {
   height: 180px;
   display: flex;
@@ -106,12 +108,13 @@
   margin-left: 10px;
 }
 
-.thread-container{
-  padding: 12px;
+.thread-container {
+  padding: 15px;
 }
 
 .thread-user-container {
   width: 100%;
+  font-size: 15px;
   display: flex;
   margin-bottom: 5px;
 }
@@ -129,4 +132,14 @@
   color: var(--primary-darker-color);
   display: flex;
   justify-content: flex-start;
+}
+.mat-card-thread{
+  padding: 7px;
+}
+.thread {
+  max-width: 210px;
+  font-size: 13px;
+  font-weight: 200;
+  line-height: 15px;
+  padding: 5px;
 }
