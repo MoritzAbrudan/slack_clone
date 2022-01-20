@@ -15,9 +15,9 @@
 
 <mat-toolbar class="message-section">
 
-    <div class="thread-container" *ngFor="let answerMessage of answerMessages; let i = index">
+    <div class="thread-container" *ngFor="let answerMessage of answerMessages">
         <div>
-            {{ answerMessage.answers }}
+            {{ answerMessage.answers }} {{ answerMessage.user }}
         </div>
     </div>
 
