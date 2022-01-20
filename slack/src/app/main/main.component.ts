@@ -9,7 +9,7 @@ import {ChannelService} from '../services/channel.service';
 import {ThreadService} from "../services/thread.service";
 import {User} from 'src/models/user.class';
 import {AuthService} from '../services/auth.service';
-import {Observable} from "rxjs";
+
 import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
 
 
@@ -26,12 +26,11 @@ export class MainComponent implements OnInit {
   selectedImage: any = null;
   downloadURL: string;
 
-  channel = '';
+  channel: any;
   questions = [];
   show = false;
   newMessage = new Message();
   user: User = new User();
-
 
   constructor(private uploadService: FileUploadService,
               private fileList: FileUploadService, //?????????
@@ -63,7 +62,7 @@ export class MainComponent implements OnInit {
     this.threadService.data$.next({
       messageID: this.questions[i]['messageId']
     });
-    this.threadService.opened = true          //open Thread
+    this.threadService.opened = true;
   }
 
   /**
@@ -95,7 +94,6 @@ export class MainComponent implements OnInit {
             this.newMessage.question = '';
             this.downloadURL = '';
           })
-
       } else {
         this.saveMessageToFirestore()
           .then(() => {
@@ -112,7 +110,7 @@ export class MainComponent implements OnInit {
   async saveMessageToFirestore() {
     const actualTime = new Date().getTime();
     await this.firestore.collection(`channels/${this.channel['channelId']}/messages`)
-      .doc(actualTime.toString())  // Time as DocumentId
+      .doc(actualTime.toString())
       .set({
         uploadTime: actualTime,
         question: this.newMessage.question,
@@ -135,8 +133,8 @@ export class MainComponent implements OnInit {
     } else {
       this.selectedImage = null;
     }
-    this.upload()
-    this.getFileUrl(this.downloadURL)
+    this.upload();
+
   }
 
   /**
@@ -151,12 +149,12 @@ export class MainComponent implements OnInit {
         percentage => {
           this.percentage = Math.round(percentage ? percentage : 0);
           if (percentage == 100) {
-            setTimeout(() => this.percentage = 0, 1000);
+            this.getFileUrl(this.downloadURL)
+            setTimeout(() => {
+              this.percentage = 0
+            }, 1000);
           }
-        }, error => {
-          console.log(error);
-        }
-      );
+        })
     }
   }
 
@@ -171,10 +169,6 @@ export class MainComponent implements OnInit {
       .then((url) => {
         this.downloadURL = url
       })
-      .catch((error) => {
-        console.log('getting file error', error)
-        return 'error'
-      });
   }
 
 }

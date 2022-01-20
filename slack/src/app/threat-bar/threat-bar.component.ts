@@ -34,7 +34,6 @@ export class ThreatBarComponent implements OnInit {
     this.getThread()
   }
 
-  //TODO
   getThread() {
     this.channelService.data$.subscribe((channelData) => {
       this.channel = channelData;
@@ -100,7 +99,7 @@ export class ThreatBarComponent implements OnInit {
 
   async saveAnswerToFirestore() {
     const actualTime = new Date().getTime();
-    this.firestore.collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageId']}/answers`)
+    await this.firestore.collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageId']}/answers`)
       .doc(actualTime.toString())  // Time as DocumentId
       .set({
         uploadTime: actualTime,
