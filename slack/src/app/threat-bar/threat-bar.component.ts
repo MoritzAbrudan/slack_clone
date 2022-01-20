@@ -16,7 +16,7 @@ export class ThreatBarComponent implements OnInit {
 
   thread = '';
   channel = '';
-  answerMessage = [];
+  answerMessages = [];
   downloadURL: string;
   selectedFiles?: FileList;
   currentFileUpload?: FileUpload;
@@ -45,11 +45,18 @@ export class ThreatBarComponent implements OnInit {
           .valueChanges()
           .subscribe((msg: any) => {
             console.log(msg);
-            this.answerMessage = msg;
+            this.answerMessages = msg;
             /* this.show = true; */
           });
       });
     })
+  }
+
+  openAnswers() {
+    this.threadService.data$.next({
+      answer: this.answerMessages['answer'],
+      // answerId: this.answerMessages[i]['customIdChannel']
+    });
   }
 
   // FireStorage
