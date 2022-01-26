@@ -134,7 +134,6 @@ export class MainComponent implements OnInit {
       this.selectedImage = null;
     }
     this.upload();
-
   }
 
   /**

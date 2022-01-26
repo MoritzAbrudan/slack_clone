@@ -102,6 +102,17 @@
   }
 }
 
+.file-name-container {
+  display: flex;
+  align-items: center;
+}
+
+.file-preview {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
 .file-name {
   font-size: 15px;
   font-weight: 100;
@@ -111,6 +122,7 @@
 .thread-container {
   padding: 15px;
 }
+
 
 .thread-user-container {
   width: 100%;
@@ -142,4 +154,12 @@
   font-weight: 200;
   line-height: 15px;
   padding: 5px;
+}
+
+.anhang-link {
+  z-index: 2;
+  img {
+    height: 60px;
+    object-fit: cover;
+  }
 }

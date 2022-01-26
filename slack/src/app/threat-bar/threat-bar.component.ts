@@ -6,6 +6,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { ChannelService } from "../services/channel.service";
 import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
+import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
 
 @Component({
   selector: 'app-threat-bar',
@@ -22,6 +23,9 @@ export class ThreatBarComponent implements OnInit {
   currentFileUpload?: FileUpload;
   newAnswer = new Message();
   percentage = 0;
+
+  imgSrc: string = '';
+  selectedImage: any = null;
 
   constructor(private uploadService: FileUploadService,
     public threadService: ThreadService,
@@ -58,33 +62,59 @@ export class ThreatBarComponent implements OnInit {
     });
   }
 
+
   // FireStorage
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
-    console.log(this.selectedFiles)
+  async selectFile(event: any): Promise<void> {
+    if (event.target.files && event.target.files[0]) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+      this.selectedFiles = event.target.files;
+    } else {
+      this.selectedImage = null;
+    }
+    this.upload();
   }
 
+  /**
+   * Upload File in selectedFiles to Firestore and delete selectedFiles
+   */
   upload(): void {
-    this.saveAnswer();
-
-    if (this.selectedFiles) {
-      const file: File | null = this.selectedFiles.item(0);
-      this.selectedFiles = undefined;
-
-      if (file) {
-        this.currentFileUpload = new FileUpload(file);
-        this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
-          percentage => {
-            this.percentage = Math.round(percentage ? percentage : 0);
-          },
-          error => {
-            console.log(error);
+    const file: File | null = this.selectedFiles.item(0);
+    this.downloadURL = file.name;
+    if (file) {
+      this.currentFileUpload = new FileUpload(file);
+      this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
+        percentage => {
+          this.percentage = Math.round(percentage ? percentage : 0);
+          if (percentage == 100) {
+            this.getFileUrl(this.downloadURL)
+            setTimeout(() => {
+              this.percentage = 0
+            }, 1000);
           }
-        );
-      }
+        })
     }
   }
 
+  /**
+   * Getting download Url from fileName
+   * @param {string} fileName
+   * @return string
+   */
+  getFileUrl(fileName: string): any {
+    const storage = getStorage();
+    getDownloadURL(ref(storage, `uploads/${fileName}`))
+      .then((url) => {
+        this.downloadURL = url
+      })
+  }
+
+  /**
+   * Save Message by clicking send button
+   * Only working if something is written in input field.
+   */
   saveAnswer() {
     if (this.newAnswer.answers.length > 0) {
       if (this.selectedFiles) {
@@ -92,13 +122,14 @@ export class ThreatBarComponent implements OnInit {
           .then(() => {
             this.selectedFiles = undefined;
             this.newAnswer.answers = '';
-          });
-
+            this.downloadURL = '';
+          })
       } else {
         this.saveAnswerToFirestore()
           .then(() => {
             this.newAnswer.answers = '';
-          });
+            this.downloadURL = '';
+          })
       }
     }
   }
