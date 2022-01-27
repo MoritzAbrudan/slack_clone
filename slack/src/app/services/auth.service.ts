@@ -39,13 +39,10 @@ export class AuthService {
           this.login = true;
           this.message = 'Logout';
           this.router.navigateByUrl(`/slack/${result[i]['id']}`);
-          break;
         } else if (userNames != result[i]['userName']) {
           this.msg.open('User not found', 'Register please or Enter right Name');
-          break;
         } else {
           this.msg.open('Wrong Password!', 'Register please or Enter right Password');
-          break;
         }
       }
     });
