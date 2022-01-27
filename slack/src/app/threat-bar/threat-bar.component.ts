@@ -17,6 +17,7 @@ export class ThreatBarComponent implements OnInit {
 
   thread = '';
   channel = '';
+  question = new Message();
   answerMessages = [];
   downloadURL: string;
   selectedFiles?: FileList;
@@ -35,14 +36,14 @@ export class ThreatBarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getThread()
+    this.getThread();
+    this.getQuestion()
   }
 
   getThread() {
     this.channelService.data$.subscribe((channelData) => {
       this.channel = channelData;
       this.threadService.data$.subscribe((threadData) => {
-        console.log(threadData)
         this.thread = threadData;
         this.firestore
           .collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageID']}/answers`)
@@ -50,6 +51,24 @@ export class ThreatBarComponent implements OnInit {
           .subscribe((msg: any) => {
             console.log(msg);
             this.answerMessages = msg;
+            /* this.show = true; */
+          });
+      });
+    })
+  }
+
+  getQuestion(){
+    this.channelService.data$.subscribe((channelData) => {
+      this.channel = channelData;
+      this.threadService.data$.subscribe((threadData) => {
+        this.thread = threadData;
+        this.firestore
+          .collection(`channels/${this.channel['channelId']}/messages`)
+          .doc(this.thread['messageID'])
+          .valueChanges()
+          .subscribe((msg: any) => {
+            //console.log('getQueston', msg);
+            this.question= msg;
             /* this.show = true; */
           });
       });

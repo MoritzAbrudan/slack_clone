@@ -16,6 +16,29 @@
 <mat-toolbar class="message-section">
 
   <div class="thread-container">
+    <div class="mb-12 question-container">
+      <div class="thread-user-container">
+        <img class="thread-user-pic" src="./assets/img/profile_Pic_gray.png" alt="Pic">
+        <div class="thrad-user-name">
+          {{ question.user }}
+        </div>
+      </div>
+      <mat-card class="mat-card-thread mat-card-thread-question">
+        <div class="card-thread-container">
+          <div *ngIf="question['downloads']">
+            <a class="anhang-link"
+               href="{{question['downloads']}}"
+               target="_blank">
+              <img src="{{question['downloads']}}">
+            </a>
+          </div>
+          <div class="thread">
+            {{ question.question }}
+          </div>
+        </div>
+      </mat-card>
+    </div>
+
     <div class="mb-12" *ngFor="let answerMessage of answerMessages">
       <div class="thread-user-container">
         <img class="thread-user-pic" src="./assets/img/profile_Pic_gray.png" alt="Pic">

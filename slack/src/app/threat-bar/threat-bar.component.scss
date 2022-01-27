@@ -29,7 +29,6 @@
 }
 
 
-
 .new-message-container {
   height: 180px;
   display: flex;
@@ -123,6 +122,10 @@
   padding: 15px;
 }
 
+.question-container {
+  background-color: #cce0ff;
+  border-radius: 7px;
+}
 
 .thread-user-container {
   width: 100%;
@@ -145,9 +148,14 @@
   display: flex;
   justify-content: flex-start;
 }
-.mat-card-thread{
+
+.mat-card-thread {
   padding: 7px;
 }
+.mat-card-thread-question{
+  background-color: #cce0ff;
+}
+
 .thread {
   max-width: 210px;
   font-size: 13px;
@@ -158,6 +166,7 @@
 
 .anhang-link {
   z-index: 2;
+
   img {
     height: 60px;
     object-fit: cover;
