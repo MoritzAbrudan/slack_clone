@@ -49,9 +49,8 @@ export class ThreatBarComponent implements OnInit {
           .collection(`channels/${this.channel['channelId']}/messages/${this.thread['messageID']}/answers`)
           .valueChanges()
           .subscribe((msg: any) => {
-            console.log(msg);
+            //console.log(msg);
             this.answerMessages = msg;
-            /* this.show = true; */
           });
       });
     })
@@ -69,7 +68,6 @@ export class ThreatBarComponent implements OnInit {
           .subscribe((msg: any) => {
             //console.log('getQueston', msg);
             this.question= msg;
-            /* this.show = true; */
           });
       });
     })
@@ -81,8 +79,6 @@ export class ThreatBarComponent implements OnInit {
     });
   }
 
-
-  // FireStorage
   async selectFile(event: any): Promise<void> {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
