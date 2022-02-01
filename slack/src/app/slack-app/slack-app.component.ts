@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AfterViewInit, Component, Directive, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/models/user.class';
@@ -22,7 +21,6 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
   constructor(public authService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              private firestore: AngularFirestore,
               public threadService: ThreadService) {
   }
 
@@ -35,9 +33,9 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
       this.userId = paramMap.get('id');
       this.authService.getUser(this.userId);
     })
-    if (!this.authService.login) {
+    /* if (!this.authService.login) {
       this.router.navigateByUrl('/');
-    } 
+    } */ 
   }
 
   logOut() {

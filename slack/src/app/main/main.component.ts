@@ -58,11 +58,11 @@ export class MainComponent implements OnInit {
   }
 
   goToThread(i) {
-    console.log('goToThread message=', i)
     this.threadService.data$.next({
       messageID: this.questions[i]['messageId']
     });
     this.threadService.opened = true;
+    this.threadService.getQuestion();
   }
 
   /**

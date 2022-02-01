@@ -7,6 +7,7 @@ import { ChannelService } from "../services/channel.service";
 import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
+import { User } from 'src/models/user.class';
 
 @Component({
   selector: 'app-threat-bar',
@@ -37,7 +38,6 @@ export class ThreatBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.getThread();
-    this.getQuestion()
   }
 
   getThread() {
@@ -53,24 +53,7 @@ export class ThreatBarComponent implements OnInit {
             this.answerMessages = msg;
           });
       });
-    })
-  }
-
-  getQuestion(){
-    this.channelService.data$.subscribe((channelData) => {
-      this.channel = channelData;
-      this.threadService.data$.subscribe((threadData) => {
-        this.thread = threadData;
-        this.firestore
-          .collection(`channels/${this.channel['channelId']}/messages`)
-          .doc(this.thread['messageID'])
-          .valueChanges()
-          .subscribe((msg: any) => {
-            //console.log('getQueston', msg);
-            this.question= msg;
-          });
-      });
-    })
+    });
   }
 
   openAnswers() {
@@ -166,7 +149,7 @@ export class ThreatBarComponent implements OnInit {
   }
 
   closeThread() {
-    this.threadService.opened = false;
+    return this.threadService.opened = false;
   }
 
 }

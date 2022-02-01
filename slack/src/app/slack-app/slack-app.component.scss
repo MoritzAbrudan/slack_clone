@@ -1,16 +1,23 @@
 .sidenav-mat-drawer {
   box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.3);
+  cursor: col-resize;
+  flex-grow: 0;
+}
+
+mwlResizable {
+  box-sizing: border-box;
 }
 
 .mat-drawer-container {
   height: 100vh;
+  display: flex;
+  justify-content: space-between;
 }
 
 //--------------Header
 .header-container {
   position: sticky;
   top: 0;
-  z-index: 2;
 }
 
 .header-content {

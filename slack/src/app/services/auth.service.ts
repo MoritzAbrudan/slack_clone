@@ -13,11 +13,10 @@ import { User } from 'src/models/user.class';
 })
 export class AuthService {
 
-
   user = new User();
   message: string = 'Login';
   guest: string = 'Guest';
-  login = false;
+  login = true;
 
   constructor(public _auth: Auth,
     public router: Router,
@@ -39,10 +38,9 @@ export class AuthService {
           this.login = true;
           this.message = 'Logout';
           this.router.navigateByUrl(`/slack/${result[i]['id']}`);
-        } else if (userNames != result[i]['userName']) {
-          this.msg.open('User not found', 'Register please or Enter right Name');
-        } else {
-          this.msg.open('Wrong Password!', 'Register please or Enter right Password');
+          break;
+        } else if ((result[i]['userName'] != userNames) || (result[i]['password'] != password)) {
+            this.msg.open('User not found! Register please or Enter right Name or Password', 'Close');
         }
       }
     });

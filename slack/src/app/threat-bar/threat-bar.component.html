@@ -20,26 +20,24 @@
       <div class="thread-user-container">
         <img class="thread-user-pic" src="./assets/img/profile_Pic_gray.png" alt="Pic">
         <div class="thrad-user-name">
-          {{ question.user }}
+          {{ threadService.question.user }}
         </div>
       </div>
       <mat-card class="mat-card-thread mat-card-thread-question">
         <div class="card-thread-container">
           <div *ngIf="question['downloads']">
-            <a class="anhang-link"
-               href="{{question['downloads']}}"
-               target="_blank">
+            <a class="anhang-link" href="{{question['downloads']}}" target="_blank">
               <img src="{{question['downloads']}}">
             </a>
           </div>
           <div class="thread">
-            {{ question.question }}
+            {{ threadService.question.question }}
           </div>
         </div>
       </mat-card>
     </div>
 
-    <div class="mb-12" *ngFor="let answerMessage of answerMessages">
+    <div class="mb-12" *ngFor="let answerMessage of answerMessages; let i = index;">
       <div class="thread-user-container">
         <img class="thread-user-pic" src="./assets/img/profile_Pic_gray.png" alt="Pic">
         <div class="thrad-user-name">
@@ -49,9 +47,7 @@
       <mat-card class="mat-card-thread">
         <div class="card-thread-container">
           <div *ngIf="answerMessage['downloads']">
-            <a class="anhang-link"
-               href="{{answerMessage['downloads']}}"
-               target="_blank">
+            <a class="anhang-link" href="{{answerMessage['downloads']}}" target="_blank">
               <img src="{{answerMessage['downloads']}}">
             </a>
           </div>
@@ -65,20 +61,12 @@
 
   <mat-toolbar-row class="new-message-container">
     <div class="new-message-box">
-                <textarea #message
-                          class="new-message-input"
-                          name="message"
-                          id="message"
-                          placeholder="Nachricht hinzufügen"
-                          (input)="setAnswer(message.value)"></textarea>
+      <textarea #message class="new-message-input" name="message" id="message" placeholder="Nachricht hinzufügen"
+        (input)="setAnswer(message.value)"></textarea>
       <div class="icon-container">
         <div class="add-image-container">
           <label class="add-image">+
-            <input type="file"
-                   id="file"
-                   (change)="selectFile($event)"
-                   name="image"
-                   autocomplete="off">
+            <input type="file" id="file" (change)="selectFile($event)" name="image" autocomplete="off">
           </label>
           <div *ngIf="percentage > 0">{{percentage.toString()}}%</div>
           <div class="file-name-container" *ngIf="selectedFiles">

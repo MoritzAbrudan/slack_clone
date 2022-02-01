@@ -16,6 +16,7 @@ import {ThreatBarComponent} from './threat-bar/threat-bar.component';
 import {LoginComponent} from './login/login.component';
 import {SlackAppComponent} from './slack-app/slack-app.component';
 import {DialogAddChannelComponent} from './dialog-add-channel/dialog-add-channel.component';
+import { ResizableDirective } from './resizable.directive';
 
 //Material
 import {MatSliderModule} from '@angular/material/slider';
@@ -30,6 +31,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import { ResizableModule } from 'angular-resizable-element';
 
 //Firebase
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';
@@ -45,10 +47,12 @@ import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
+    ResizableDirective,
     MainComponent,
     SidebarComponent,
     ChannelBoxComponent,
@@ -75,6 +79,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
+    ResizableModule,
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
