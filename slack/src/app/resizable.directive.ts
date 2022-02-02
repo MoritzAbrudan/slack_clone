@@ -1,4 +1,4 @@
-import { Directive, ElementRef, OnInit, Input } from '@angular/core';
+import {Directive, ElementRef, OnInit, Input} from '@angular/core';
 
 @Directive({
   selector: '[appResizable]' // Attribute selector
@@ -6,14 +6,13 @@ import { Directive, ElementRef, OnInit, Input } from '@angular/core';
 
 export class ResizableDirective implements OnInit {
 
-
-  @Input() resizableGrabWidth = 2;
-  @Input() resizableMinWidth = 280;
+  @Input() resizableGrabWidth = 1;
+  @Input() resizableMinWidth = 281;
 
   dragging = false;
 
   constructor(private el: ElementRef) {
-    
+
     function preventGlobalMouseEvents() {
       document.body.style['pointer-events'] = 'none';
     }
@@ -24,10 +23,10 @@ export class ResizableDirective implements OnInit {
 
 
     const newWidth = (wid) => {
-      const newWidth = Math.max(this.resizableMinWidth, wid);
-      el.nativeElement.style.width = (newWidth) + "px";
+      const newWidth = document.documentElement.clientWidth - wid
+      const correctWidth = Math.max(this.resizableMinWidth, newWidth);
+      el.nativeElement.style.width = (correctWidth) + "px";
     }
-
 
     const mouseMoveG = (evt) => {
       if (!this.dragging) {
@@ -63,7 +62,6 @@ export class ResizableDirective implements OnInit {
       }
     };
 
-
     const mouseMove = (evt) => {
       if (this.inDragRegion(evt) || this.dragging) {
         el.nativeElement.style.cursor = "col-resize";
@@ -72,7 +70,6 @@ export class ResizableDirective implements OnInit {
       }
     }
 
-
     document.addEventListener('mousemove', mouseMoveG, true);
     document.addEventListener('mouseup', mouseUpG, true);
     el.nativeElement.addEventListener('mousedown', mouseDown, true);
@@ -80,7 +77,7 @@ export class ResizableDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    this.el.nativeElement.style["border-left"] = this.resizableGrabWidth + "px solid darkgrey";
+    //this.el.nativeElement.style["border-left"] = this.resizableGrabWidth + "px solid darkgrey";
   }
 
   inDragRegion(evt) {
