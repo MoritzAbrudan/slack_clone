@@ -31,7 +31,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import { ResizableModule } from 'angular-resizable-element';
+import {ResizableModule} from "angular-resizable-element";
 
 //Firebase
 import {initializeApp, provideFirebaseApp} from '@angular/fire/app';

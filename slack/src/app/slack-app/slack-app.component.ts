@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Directive, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/models/user.class';
@@ -35,7 +35,7 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
     })
     /* if (!this.authService.login) {
       this.router.navigateByUrl('/');
-    } */ 
+    } */
   }
 
   logOut() {

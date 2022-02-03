@@ -7,7 +7,7 @@ import { ChannelService } from "../services/channel.service";
 import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 import {getDownloadURL, getStorage, ref} from "@angular/fire/storage";
-import { User } from 'src/models/user.class';
+
 
 @Component({
   selector: 'app-threat-bar',
