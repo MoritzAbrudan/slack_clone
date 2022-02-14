@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/models/user.class';
@@ -15,14 +15,16 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
 
   userId = '';
   user: User = new User();
+  
 
   @ViewChild('thread') thread: MatDrawer;
-
+  
   constructor(public authService: AuthService,
               private router: Router,
               private route: ActivatedRoute,
-              public threadService: ThreadService) {
-  }
+              public threadService: ThreadService,
+              public el: ElementRef) {
+              }
 
   ngAfterViewInit(): void {
     this.thread.opened = this.threadService.opened;
@@ -33,9 +35,9 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
       this.userId = paramMap.get('id');
       this.authService.getUser(this.userId);
     })
-    /* if (!this.authService.login) {
+    if (!this.authService.login) {
       this.router.navigateByUrl('/');
-    } */
+    }
   }
 
   logOut() {

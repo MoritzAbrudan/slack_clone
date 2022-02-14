@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
     "angular-resizable-element": "^5.0.0",
+    "angular-resize-event": "^3.1.1",
     "angularfire2": "^5.0.0-rc.9",
     "firebase": "^9.4.0",
     "ngx-autosize": "^1.8.7",

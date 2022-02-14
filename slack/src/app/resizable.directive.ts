@@ -6,15 +6,17 @@ import {Directive, ElementRef, OnInit, Input} from '@angular/core';
 
 export class ResizableDirective implements OnInit {
 
-  @Input() resizableGrabWidth = 1;
+  @Input() resizableGrabWidth = 3;
   @Input() resizableMinWidth = 281;
+
 
   dragging = false;
 
   constructor(private el: ElementRef) {
 
     function preventGlobalMouseEvents() {
-      document.body.style['pointer-events'] = 'none';
+      //document.body.style['pointer-events'] = 'none';
+      el.nativeElement.style["border-left"] = "3px solid #2256ed";
     }
 
     function restoreGlobalMouseEvents() {
@@ -33,15 +35,6 @@ export class ResizableDirective implements OnInit {
         return;
       }
       newWidth(evt.clientX);
-      evt.stopPropagation();
-    };
-
-    const dragMoveG = (evt) => {
-      if (!this.dragging) {
-        return;
-      }
-      const newWidth = Math.max(this.resizableMinWidth, (evt.clientX)) + "px";
-      el.nativeElement.style.width = (evt.clientX) + "px";
       evt.stopPropagation();
     };
 
@@ -65,8 +58,10 @@ export class ResizableDirective implements OnInit {
     const mouseMove = (evt) => {
       if (this.inDragRegion(evt) || this.dragging) {
         el.nativeElement.style.cursor = "col-resize";
+        el.nativeElement.style["border-left"] = "#000";
       } else {
         el.nativeElement.style.cursor = "default";
+        
       }
     }
 
@@ -77,7 +72,6 @@ export class ResizableDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.el.nativeElement.style["border-left"] = this.resizableGrabWidth + "px solid darkgrey";
   }
 
   inDragRegion(evt) {

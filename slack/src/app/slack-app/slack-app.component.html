@@ -4,30 +4,26 @@
         <app-sidebar></app-sidebar>
     </mat-drawer>
 
-    <div class="example-sidenav-content">
-        <mat-toolbar color="primary" class="header-container">
-            <mat-toolbar-row class="header-content">
+    <mat-toolbar color="primary" class="header-container">
+        <mat-toolbar-row class="header-content">
 
-                <div class="header-left">
-                    <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
-                    <img class="header-logo" src="assets/favicons/favicon-96x96.png">
-                    <span>Slack-Clone</span>
-                </div>
+            <div class="header-left">
+                <mat-icon (click)="drawer.toggle()" class="menu-icon">menu</mat-icon>
+                <img class="header-logo" src="assets/favicons/favicon-96x96.png">
+                <span>Slack-Clone</span>
+            </div>
 
-                <div>
-                    <span class="mr-16">{{ authService.user.userName }}</span>
-                    <a mat-button target="_blank" (click)="logOut()" class="header-right">
-                        <mat-icon matSuffix>logout</mat-icon>
-                        {{authService.message}}
-                    </a>
-                </div>
+            <div>
+                <span class="mr-16">{{ authService.user.userName }}</span>
+                <a mat-button target="_blank" (click)="logOut()" class="header-right">
+                <mat-icon matSuffix>logout</mat-icon>
+                {{authService.message}}</a>
+            </div>
 
-            </mat-toolbar-row>
-        </mat-toolbar>
-
-        <app-main></app-main>
-
-    </div>
+        </mat-toolbar-row>
+    </mat-toolbar>
+    
+    <app-main></app-main>
 
     <mat-drawer #thread class="sidenav-mat-drawer" 
     mode="side" 

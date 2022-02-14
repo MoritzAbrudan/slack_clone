@@ -16,7 +16,7 @@ export class AuthService {
   user = new User();
   message: string = 'Login';
   guest: string = 'Guest';
-  login = true;
+  login = false;
 
   constructor(public _auth: Auth,
     public router: Router,
