@@ -35,9 +35,9 @@ export class SlackAppComponent implements OnInit, AfterViewInit {
       this.userId = paramMap.get('id');
       this.authService.getUser(this.userId);
     })
-    if (!this.authService.login) {
+    /* if (!this.authService.login) {
       this.router.navigateByUrl('/');
-    }
+    } */
   }
 
   logOut() {
