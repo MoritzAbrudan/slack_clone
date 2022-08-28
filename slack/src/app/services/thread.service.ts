@@ -1,24 +1,25 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import {BehaviorSubject} from "rxjs";
+import { BehaviorSubject } from 'rxjs';
 import { Message } from 'src/models/message.class';
 import { ChannelService } from './channel.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThreadService {
-
   opened: boolean = false;
   public data$: BehaviorSubject<any> = new BehaviorSubject('');
   thread = '';
   channel = '';
   question = new Message();
 
-  constructor(public channelService: ChannelService, private firestore: AngularFirestore) { }
+  constructor(
+    public channelService: ChannelService,
+    private firestore: AngularFirestore
+  ) {}
 
-  getQuestion(){
+  getQuestion() {
     this.channelService.data$.subscribe((channelData) => {
       this.channel = channelData;
       this.data$.subscribe((threadData) => {
@@ -29,9 +30,9 @@ export class ThreadService {
           .valueChanges()
           .subscribe((msg: any) => {
             //console.log('getQueston', msg);
-            this.question= msg;
+            this.question = msg;
           });
       });
-    })
+    });
   }
 }

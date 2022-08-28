@@ -9,74 +9,91 @@ import { from } from 'rxjs';
 import { User } from 'src/models/user.class';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   user = new User();
   message: string = 'Login';
   guest: string = 'Guest';
-  login = true;
+  login = false; //TODO auf false setzen bevor ich deploy
 
-  constructor(public _auth: Auth,
+  constructor(
+    public _auth: Auth,
     public router: Router,
     public firestore: AngularFirestore,
     public msg: MatSnackBar,
-    public auth: AngularFireAuth) { }
+    public auth: AngularFireAuth
+  ) {}
 
   /**
-   * 
+   *
    * login function
    * @param userNames parameter for the username
    * @param password parameter for the password
    */
   signInUser(userNames: string, password: string) {
-    return this.firestore.collection('users').valueChanges({ idField: 'id' }).subscribe((result) => {
-
-      for (let i = 0; i < result.length; i++) {
-        if ((result[i]['userName'] == userNames) && (result[i]['password'] == password)) {
-          this.login = true;
-          this.message = 'Logout';
-          this.router.navigateByUrl(`/slack/${result[i]['id']}`);
-          break;
-        } else if ((result[i]['userName'] != userNames) || (result[i]['password'] != password)) {
-            this.msg.open('User not found! Register please or Enter right Name or Password', 'Close');
+    return this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'id' })
+      .subscribe((result) => {
+        for (let i = 0; i < result.length; i++) {
+          try {
+            if (
+              result[i]['userName'] === userNames &&
+              result[i]['password'] === password
+            ) {
+              this.login = true;
+              this.message = 'Logout';
+              this.router.navigateByUrl(`/slack/${result[i]['id']}`);
+            }
+          } catch (err) {
+            if (err) {
+              this.msg.open(
+                'User not found! Register please or Enter right Name or Password',
+                'Close'
+              );
+            }
+          }
         }
-      }
-    });
+      });
   }
 
   /**
-   * 
+   *
    * @param email for the email address
    * @param password for the password
    * @returns that will be return
    */
   signUp(email: string, password: string) {
-    return from(createUserWithEmailAndPassword(this._auth, email, password).then(() => {
-      this.login = true;
-      this.message = 'Logout';
-    }));
+    return from(
+      createUserWithEmailAndPassword(this._auth, email, password).then(() => {
+        this.login = true;
+        this.message = 'Logout';
+      })
+    );
   }
 
   /**
    * user can login as a guest
-   * 
+   *
    */
   guestLogin() {
-    this.firestore.collection('users').valueChanges({ idField: 'id' }).subscribe((result) => {
-      for (let i = 0; i < result.length; i++) {
-        if (result[i]['userName'] == this.guest) {
-          this.login = true;
-          this.message = 'Logout';
-          this.router.navigateByUrl(`/slack/${result[i]['id']}`);
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'id' })
+      .subscribe((result) => {
+        for (let i = 0; i < result.length; i++) {
+          if (result[i]['userName'] == this.guest) {
+            this.login = true;
+            this.message = 'Logout';
+            this.router.navigateByUrl(`/slack/${result[i]['id']}`);
+          }
         }
-      }
-    });
+      });
   }
 
   /**
-   * 
+   *
    * @param userId userId for the Slack Component you can show the username
    */
   getUser(userId) {

@@ -1,34 +1,29 @@
-import {Directive, ElementRef, OnInit, Input} from '@angular/core';
+import { Directive, ElementRef, OnInit, Input, Output } from '@angular/core';
 
 @Directive({
-  selector: '[appResizable]' // Attribute selector
+  selector: '[appResizable]', // Attribute selector
 })
-
 export class ResizableDirective implements OnInit {
-
   @Input() resizableGrabWidth = 3;
   @Input() resizableMinWidth = 281;
-
 
   dragging = false;
 
   constructor(private el: ElementRef) {
-
     function preventGlobalMouseEvents() {
       //document.body.style['pointer-events'] = 'none';
-      el.nativeElement.style["border-left"] = "3px solid #2256ed";
+      el.nativeElement.style['border-left'] = '3px solid #2256ed';
     }
 
     function restoreGlobalMouseEvents() {
       document.body.style['pointer-events'] = 'auto';
     }
 
-
     const newWidth = (wid) => {
-      const newWidth = document.documentElement.clientWidth - wid
+      const newWidth = document.documentElement.clientWidth - wid;
       const correctWidth = Math.max(this.resizableMinWidth, newWidth);
-      el.nativeElement.style.width = (correctWidth) + "px";
-    }
+      el.nativeElement.style.width = correctWidth + 'px';
+    };
 
     const mouseMoveG = (evt) => {
       if (!this.dragging) {
@@ -57,13 +52,12 @@ export class ResizableDirective implements OnInit {
 
     const mouseMove = (evt) => {
       if (this.inDragRegion(evt) || this.dragging) {
-        el.nativeElement.style.cursor = "col-resize";
-        el.nativeElement.style["border-left"] = "#000";
+        el.nativeElement.style.cursor = 'col-resize';
+        el.nativeElement.style['border-left'] = '#000';
       } else {
-        el.nativeElement.style.cursor = "default";
-        
+        el.nativeElement.style.cursor = 'default';
       }
-    }
+    };
 
     document.addEventListener('mousemove', mouseMoveG, true);
     document.addEventListener('mouseup', mouseUpG, true);
@@ -71,11 +65,14 @@ export class ResizableDirective implements OnInit {
     el.nativeElement.addEventListener('mousemove', mouseMove, true);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   inDragRegion(evt) {
-    return this.el.nativeElement.clientWidth - evt.clientX + this.el.nativeElement.offsetLeft > this.resizableGrabWidth;
+    return (
+      this.el.nativeElement.clientWidth -
+        evt.clientX +
+        this.el.nativeElement.offsetLeft >
+      this.resizableGrabWidth
+    );
   }
-
 }
